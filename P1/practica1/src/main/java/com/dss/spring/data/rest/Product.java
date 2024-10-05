@@ -1,3 +1,4 @@
+package com.dss.spring.data.rest;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

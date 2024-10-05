@@ -1,3 +1,4 @@
+package com.dss.spring.data.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -5,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/api/products")
 public class ProductController {
     private final ProductService productService;
 
@@ -30,9 +31,13 @@ public class ProductController {
     	return productService.saveProduct(newProduct);
     }
     
-    @DeleteMapping("/{id")
-    public void deleteProduct(@PathVariable Long id) {
-    	productService.deleteProduct(id);
+    @DeleteMapping("/{id}")
+    public boolean deleteProduct(@PathVariable Long id) {
+    	if(productService.doesProductExist(id)){
+	    	productService.deleteProduct(id);
+	    	return true;
+	    }
+    	return false;
     }
     
     

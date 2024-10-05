@@ -1,3 +1,4 @@
+package com.dss.spring.data.rest;
 
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -5,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 //@RepositoryRestResource(collectionResourceRel="tasks",path="tasks")
 public interface ProductRepo extends JpaRepository<Product, Long> {
-	
+
 }
