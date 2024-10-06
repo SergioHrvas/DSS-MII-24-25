@@ -1,6 +1,7 @@
 package com.dss.spring.data.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,9 +39,7 @@ public class ProductController {
 	    	return true;
 	    }
     	return false;
-    }
-    
-    
+    } 
     
     
     

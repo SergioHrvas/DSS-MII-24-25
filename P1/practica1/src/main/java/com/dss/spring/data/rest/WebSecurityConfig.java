@@ -17,7 +17,7 @@ public class WebSecurityConfig {
             .csrf(csrf -> csrf.disable()) // Deshabilitar CSRF para simplificar el acceso a H2 Console
             .authorizeHttpRequests(authorize -> 
                 authorize
-                    .requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll() // Permitir acceso sin autenticación a la consola H2
+                    .requestMatchers(new AntPathRequestMatcher("/index.html", "/h2-console/**")).permitAll() // Permitir acceso sin autenticación a la consola H2
                     .anyRequest().authenticated() // Requiere autenticación para cualquier otro endpoint
             )
             .httpBasic(); // Autenticación básica
