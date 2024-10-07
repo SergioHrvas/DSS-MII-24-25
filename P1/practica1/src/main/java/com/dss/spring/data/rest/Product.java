@@ -12,7 +12,7 @@ import lombok.Data;
 public class Product{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private Long id;
 	private String nombre;
 	private double precio;
 	

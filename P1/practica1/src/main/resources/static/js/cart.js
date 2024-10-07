@@ -1,44 +1,47 @@
-// Función para cargar productos con autenticación básica
-async function loadProducts() {
+// Función para cargar items del carro con autenticación básica
+async function loadItems() {
     const username = 'admin'; // Cambia esto por tu nombre de usuario
     const password = 'admin'; // Cambia esto por tu contraseña
 
     // Codificar las credenciales en Base64
     const credentials = btoa(`${username}:${password}`);
-
 	    try {
-        const response = await fetch('/api/products', {
+        const response = await fetch('/api/cart/1', {
             method: 'GET',
             headers: {
                 'Authorization': `Basic ${credentials}`, // Añadir el encabezado de autorización
             }
         });
-			
+				
         if (!response.ok) {
             throw new Error(`Error: ${response.status}`);
         }
 
-        const products = await response.json();
-        const productTable = document.getElementById('productTable').querySelector('tbody');
-        productTable.innerHTML = ''; // Limpiar la tabla
+        const items = await response.json();
+		console.log(items);
 
-        products.forEach(product => {
+        const itemsTable = document.getElementById('items-table').querySelector('tbody');
+        itemsTable.innerHTML = ''; // Limpiar la tabla
+
+        items.forEach(item => {
             const row = document.createElement('tr');
             row.innerHTML = `
-                <td>${product.id}</td>
-                <td>${product.nombre}</td>
-                <td>$${product.precio.toFixed(2)}</td>
+                <td>${item.productId}</td>
+                <td>${item.productName}</td>
+                <td>$${item.productPrice.toFixed(2)}</td>
+				<td>$${item.productNum}</td>
+				<td>$${item.productNum * item.productPrice.toFixed(2)}</td>
                 <td>
-                    <a href="editar-producto/${product.id}" class="btn btn-warning btn-sm">Editar</a>
-                    <button onClick="deleteProduct(${product.id})" class="btn btn-danger btn-sm">Eliminar</button>
+                    <button onClick="deleteProduct(${item.productId})" class="btn btn-danger btn-sm">Eliminar</button>
                 </td>
             `;
-            productTable.appendChild(row);
+            itemsTable.appendChild(row);
         });
     } catch (error) {
         console.error('Error loading products:', error);
     }
 }
+/*
 
 //Función para eliminar un producto
 async function deleteProduct(id){
@@ -63,6 +66,6 @@ async function deleteProduct(id){
 }
 
 
-
+*/
 // Cargar productos al cargar la página
-window.onload = loadProducts;
+window.onload = loadItems;

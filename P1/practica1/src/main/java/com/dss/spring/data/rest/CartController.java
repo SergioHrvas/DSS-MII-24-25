@@ -1,6 +1,8 @@
 package com.dss.spring.data.rest;
 import org.springframework.web.bind.annotation.*;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import java.util.List;
 
 @RestController
@@ -12,18 +14,22 @@ public class CartController {
         this.cartService = cartService;
     }
     
-    @GetMapping
-    List<CartItem> all(@PathVariable Long id){
+    @GetMapping("/{id}")
+    List<CartItemDTO> all(@PathVariable Long id){
     	return cartService.getProductsCart(id);
     }
     
-    @GetMapping("/{id}")
-    public void addCartItem(@PathVariable Long id, @RequestBody long idProduct, @RequestBody int num){
+    @PostMapping("/{id}")
+    public void addCartItem(@PathVariable Long id, @RequestBody ObjectNode json){
+    	Long idProduct = json.get("idProduct").asLong();
+    	int num = json.get("num").asInt();
     	cartService.addItemCart(id, idProduct, num);
     }
     
     @DeleteMapping("/{id}")
-    public boolean deleteCartItem(@PathVariable Long id, @RequestBody long idProduct, @RequestBody int num) {
+    public boolean deleteCartItem(@PathVariable Long id, @RequestBody ObjectNode json) {
+    	Long idProduct = json.get("idProduct").asLong();
+    	int num = json.get("num").asInt();
     	return cartService.deleteProductCart(id, idProduct, num);
     } 
         

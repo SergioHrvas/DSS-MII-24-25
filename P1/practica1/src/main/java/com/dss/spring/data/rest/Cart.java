@@ -16,25 +16,13 @@ import lombok.Data;
 public class Cart{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private Long id;
 	
     @OneToMany(mappedBy = "cart") // Un carrito tiene múltiples CartItems
 	private List<CartItem> items;
 	
 	void addItem(CartItem new_item) {
-		boolean entro = false;
-		for(CartItem item : getItems()) {
-			if(item.getIdProduct() == new_item.getIdProduct()) {
-				item.setNum(item.getNum() + new_item.getNum());
-				entro = true;
-				break;
-			}
-		}
-		if(!entro) {
-			items.add(new_item);
-		}
-		
-		
+		items.add(new_item);
 	}
 	
 	boolean deleteItem(CartItem new_item) {
