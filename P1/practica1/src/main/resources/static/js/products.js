@@ -29,9 +29,13 @@ async function loadProducts() {
                 <td>${product.nombre}</td>
                 <td>$${product.precio.toFixed(2)}</td>
                 <td>
-                    <a href="editar-producto/${product.id}" class="btn btn-warning btn-sm">Editar</a>
-                    <button onClick="deleteProduct(${product.id})" class="btn btn-danger btn-sm">Eliminar</button>
-                </td>
+				<div class="input-group">
+				    		<button onClick="addProduct(${product.id}, this.nextElementSibling.value)" type="button" class="btn btn-success">Añadir</button>
+				  		<input type="number" min="1" class="form-control ms-2" style="max-width: 100px;">
+				  	<a href="editar-producto/${product.id}" class="btn btn-warning ms-2">Editar</a>
+                   <button onClick="deleteProduct(${product.id})" class="btn btn-danger ms-2">Eliminar</button>
+                 </div>
+				 </td>
             `;
             productTable.appendChild(row);
         });
@@ -47,8 +51,8 @@ async function deleteProduct(id){
 
 	// Codificar las credenciales en Base64
 	const credentials = btoa(`${username}:${password}`);
-	console.log("aaa");
-	try {
+
+		try {
 	    const response = await fetch('/api/products/' + id, {
 	        method: 'DELETE',
 	        headers: {
@@ -62,6 +66,35 @@ async function deleteProduct(id){
 	}
 }
 
+
+//Función para eliminar un producto
+async function addProduct(idProduct, num){
+	const username = 'admin'; // Cambia esto por tu nombre de usuario
+	const password = 'admin'; // Cambia esto por tu contraseña
+
+	console.log(num);
+	// Codificar las credenciales en Base64
+	const credentials = btoa(`${username}:${password}`);
+
+	json_body = JSON.stringify({
+		idProduct,
+		num
+	})
+		try {
+	    const response = await fetch('/api/cart/1', {
+	        method: 'POST',
+	        headers: {
+				'Content-Type': 'application/json', // Asegúrate de establecer el tipo de contenido
+	            'Authorization': `Basic ${credentials}`, // Añadir el encabezado de autorización
+	        },
+			body: json_body
+	    });
+		
+		location.reload()
+	} catch (error) {
+	    console.error('Error deleting product:', error);
+	}
+}
 
 
 // Cargar productos al cargar la página

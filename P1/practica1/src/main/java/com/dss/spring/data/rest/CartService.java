@@ -10,10 +10,12 @@ import java.util.Optional;
 public class CartService {
 	private final CartRepo cartRepo;
 	private final ProductRepo productRepo;
-	
-	public CartService(CartRepo cartRepo, ProductRepo productRepo) {
+	private final CartItemRepo cartItemRepo;
+
+	public CartService(CartRepo cartRepo, ProductRepo productRepo, CartItemRepo cartItemRepo) {
 		this.cartRepo = cartRepo;
 		this.productRepo = productRepo;
+		this.cartItemRepo = cartItemRepo;
 	}
 	
 	public List<CartItemDTO> getProductsCart(Long id){
@@ -35,7 +37,8 @@ public class CartService {
 	public void addItemCart(Long id, Long idProduct, int num){
 		//Obtenemos el carro
 		Cart cart = cartRepo.findById(id).orElseThrow(() -> new IllegalArgumentException());
-	   		
+
+    	
 		Optional<CartItem> existingItem = cart.getItems().stream().
 				filter(item -> item.getIdProduct().equals(idProduct)).findFirst();
 		
@@ -54,15 +57,27 @@ public class CartService {
 		cartRepo.save(cart);
 	}
 	
-	public boolean deleteProductCart(Long id, Long idProduct, int num){
+	public boolean updateOrDeleteProductCart(Long id, Long idProduct, int num){
 		Cart cart = cartRepo.findById(id).orElseThrow(() -> new IllegalArgumentException());
 		
-		CartItem newCartItem = new CartItem();
-		newCartItem.setNum(num);
-		newCartItem.setIdProduct(idProduct);
+		boolean deleted = false;
 		
-		boolean deleted = cart.deleteItem(newCartItem);
+		Optional<CartItem> existingItem = cart.getItems().stream().
+				filter(item -> item.getIdProduct().equals(idProduct)).findFirst();
 		
+		if(existingItem.isPresent()) {
+			CartItem item = existingItem.get();
+			if(num == item.getNum()) {
+				//Borramos el item
+	            cart.getItems().remove(item);
+	            cartItemRepo.delete(item);
+	            deleted = true;
+			}
+			else {
+				item.setNum(item.getNum() - num);
+			}
+		}
+				
 		cartRepo.save(cart);
 		
 		return deleted;

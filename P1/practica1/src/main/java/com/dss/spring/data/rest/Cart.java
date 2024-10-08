@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 
 
@@ -18,7 +19,7 @@ public class Cart{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-    @OneToMany(mappedBy = "cart") // Un carrito tiene múltiples CartItems
+    @OneToMany(mappedBy = "cart",  cascade = CascadeType.ALL) // Un carrito tiene múltiples CartItems
 	private List<CartItem> items;
 	
 	void addItem(CartItem new_item) {

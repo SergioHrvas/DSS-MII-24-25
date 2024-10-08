@@ -3,7 +3,6 @@ function isValidId(id) {
     return /^\d+$/.test(id); // Verifica si el ID solo contiene dígitos
 }
 
-
 document.addEventListener("DOMContentLoaded", function() {
 	// Extraer parámetros de la URL
 
@@ -35,8 +34,8 @@ async function cargarDatosProducto(id) {
 				'Authorization': `Basic ${credentials}`, // Añadir el encabezado de autorización
 			},
 		});
-		console.log(response);
-		if (response.ok) {
+
+				if (response.ok) {
 			const product = await response.json();
 			document.getElementById("nombre").value = product.nombre;
 			document.getElementById("precio").value = product.precio;
