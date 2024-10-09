@@ -2,6 +2,9 @@ package com.dss.spring.data.rest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.MediaType;
 import java.util.List;
 
 @RestController
@@ -9,8 +12,11 @@ import java.util.List;
 public class ProductController {
     private final ProductService productService;
 
-    public ProductController(ProductService productService) {
+    private DatabaseExportService databaseExportService;
+
+    public ProductController(ProductService productService, DatabaseExportService databaseExportService) {
         this.productService = productService;
+        this.databaseExportService = databaseExportService;
     }
     
     @GetMapping
@@ -38,6 +44,14 @@ public class ProductController {
     	return false;
     } 
     
-    
+
+    @GetMapping("/export/products")
+    public ResponseEntity<byte[]> exportProducts() {
+        byte[] sqlScript = databaseExportService.exportDatabaseToSql();
+        return ResponseEntity.ok()
+                .header("Content-Disposition", "attachment; filename=\"products.sql\"")
+                .contentType(MediaType.TEXT_PLAIN)
+                .body(sqlScript);
+    }
     
 }

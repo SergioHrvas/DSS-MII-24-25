@@ -26,7 +26,7 @@ public class Application11Application {
     CommandLineRunner jpaSample(ProductRepo productRepo) {
       return (args) -> {
 	//Almacenar los 2 "instancias" de Todo en la base de datos H2   
-    productRepo.save(new Product());
+   /* productRepo.save(new Product());
     Product product = new Product();
 
     product.setPrecio(3);
@@ -38,7 +38,7 @@ public class Application11Application {
     productRepo.findAll().forEach(products -> {
       log.info(products.toString());
     });
-    log.info("");
+    log.info("");*/
     /*RestTemplate restTemplate = new RestTemplate();
     //Ahora los vamos a obtener del servidor REST	   
     Product firstProduct = restTemplate.getForObject("http://localhost:8080/rest/tasks/1", Product.class);
