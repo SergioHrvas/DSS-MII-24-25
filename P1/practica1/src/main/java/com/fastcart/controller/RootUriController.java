@@ -1,4 +1,4 @@
-package com.dss.spring.data.rest;
+package com.fastcart.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 @Controller

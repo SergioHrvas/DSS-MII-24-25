@@ -31,19 +31,10 @@ document.addEventListener("DOMContentLoaded", function() {
 })
 
 async function cargarDatosProducto(id) {
-	const username = 'admin'; // Cambia esto por tu nombre de usuario
-	const password = 'admin'; // Cambia esto por tu contraseña
-
-	// Codificar las credenciales en Base64
-	const credentials = btoa(`${username}:${password}`);
-
 	try {
 
 		const response = await fetch('/api/products/' + id, {
 			method: 'GET',
-			headers: {
-				'Authorization': `Basic ${credentials}`, // Añadir el encabezado de autorización
-			},
 		});
 
 				if (response.ok) {
@@ -78,7 +69,7 @@ async function saveProduct(event) {
 	}
 	try {
 
-			const response = await fetch('/api/products', {
+			const response = await fetch('/admin/api/products', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -87,10 +78,9 @@ async function saveProduct(event) {
 			}).
 				then(response => response.json().
 					then(data => {
-						console.log("Producto creado", data)
 					    window.location.href = '/nuevo-producto';}
 					).
-					catch(error => console.log("Error: " + error)));
+					catch(error => console.error("Error: " + error)));
 	} catch (error) {
 		console.error('Error creating product:', error);
 	}
@@ -137,7 +127,7 @@ async function loadProducts() {
 async function deleteProduct(id){
 
 		try {
-	    const response = await fetch('/api/products/' + id, {
+	    const response = await fetch('/admin/api/products/' + id, {
 	        method: 'DELETE',
 	    });
 		

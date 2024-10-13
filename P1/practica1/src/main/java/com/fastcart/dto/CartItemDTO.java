@@ -1,4 +1,6 @@
-package com.dss.spring.data.rest;
+package com.fastcart.dto;
+
+import com.fastcart.model.Product;
 
 import lombok.Data;
 

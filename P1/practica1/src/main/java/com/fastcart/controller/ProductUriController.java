@@ -1,9 +1,12 @@
-package com.dss.spring.data.rest;
+package com.fastcart.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import com.fastcart.model.Product;
+import com.fastcart.service.ProductService;
 
 
 @Controller

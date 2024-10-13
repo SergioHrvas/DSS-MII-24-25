@@ -1,9 +1,11 @@
-package com.dss.spring.data.rest;
+package com.fastcart.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 //import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
+import com.fastcart.model.Product;
+
 //@RepositoryRestResource(collectionResourceRel="tasks",path="tasks")
-public interface CartRepo extends JpaRepository<Cart, Long> {
+public interface ProductRepo extends JpaRepository<Product, Long> {
 
 }

@@ -1,6 +1,16 @@
-package com.dss.spring.data.rest;
+package com.fastcart.service;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+
+import com.fastcart.dto.CartItemDTO;
+import com.fastcart.repository.CartItemRepo;
+import com.fastcart.model.Cart;
+import com.fastcart.model.CartItem;
+import com.fastcart.model.Product;
+import com.fastcart.model.User;
+import com.fastcart.repository.CartRepo;
+import com.fastcart.repository.ProductRepo;
+import com.fastcart.repository.UserRepo;
 
 import java.util.ArrayList;
 import java.util.List;

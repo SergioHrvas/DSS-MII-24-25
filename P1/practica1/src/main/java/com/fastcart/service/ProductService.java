@@ -1,5 +1,9 @@
-package com.dss.spring.data.rest;
+package com.fastcart.service;
 import org.springframework.stereotype.Service;
+
+import com.fastcart.model.Product;
+import com.fastcart.repository.ProductRepo;
+
 import java.util.List;
 import java.util.Optional;
 

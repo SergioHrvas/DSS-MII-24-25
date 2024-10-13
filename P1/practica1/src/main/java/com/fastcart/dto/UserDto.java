@@ -1,4 +1,4 @@
-package com.dss.spring.data.rest;
+package com.fastcart.dto;
 
 public class UserDto {
 

@@ -1,7 +1,8 @@
-package com.dss.spring.data.rest;
+package com.fastcart.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -12,6 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
+
+import com.fastcart.service.UserDetailsServiceImpl;
 
 import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
 
@@ -33,10 +36,10 @@ public class WebSecurityConfig {
             .authorizeHttpRequests(authorize -> 
                 authorize
                 .requestMatchers(toH2Console()).permitAll()
-                .requestMatchers(mvcMatcherBuilder.pattern("/"), mvcMatcherBuilder.pattern("/index.html"), mvcMatcherBuilder.pattern("/h2-console/**"), mvcMatcherBuilder.pattern("/api/products/**"),   mvcMatcherBuilder.pattern("/productos")).permitAll() // Permitir acceso sin autenticación a la consola H2
-                .requestMatchers(mvcMatcherBuilder.pattern("/admin/**")).hasRole("ADMIN")
-                .requestMatchers(mvcMatcherBuilder.pattern("/nuevo-producto"), mvcMatcherBuilder.pattern("/editar-producto/**"),mvcMatcherBuilder.pattern("/api/cart/**")).authenticated()  
-               .anyRequest().authenticated() // Requiere autenticación para cualquier otro endpoint
+                .requestMatchers(mvcMatcherBuilder.pattern("/"), mvcMatcherBuilder.pattern("/index.html"), mvcMatcherBuilder.pattern("/h2-console/**"), mvcMatcherBuilder.pattern("/js/**"), mvcMatcherBuilder.pattern("/api/products"), mvcMatcherBuilder.pattern("/productos")).permitAll() // Permitir acceso sin autenticación a la consola H2
+                .requestMatchers(mvcMatcherBuilder.pattern("/admin/**"), mvcMatcherBuilder.pattern("/nuevo-producto"), mvcMatcherBuilder.pattern("/editar-producto/**")).hasRole("ADMIN")
+                .requestMatchers(mvcMatcherBuilder.pattern("/api/cart"), mvcMatcherBuilder.pattern("/api/cart/**")).authenticated()  
+                .anyRequest().authenticated() // Requiere autenticación para cualquier otro endpoint
             )
             .formLogin(formLogin -> formLogin.loginPage("/login").defaultSuccessUrl("/index.html", true).permitAll())
             .logout(logout->logout.permitAll()

@@ -1,4 +1,4 @@
-package com.dss.spring.data.rest;
+package com.fastcart.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

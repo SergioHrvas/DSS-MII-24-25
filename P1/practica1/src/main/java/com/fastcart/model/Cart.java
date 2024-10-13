@@ -1,4 +1,4 @@
-package com.dss.spring.data.rest;
+package com.fastcart.model;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class Cart{
     private User user;
     
 	
-	void addItem(CartItem new_item) {
+	public void addItem(CartItem new_item) {
 		items.add(new_item);
 	}
 	
