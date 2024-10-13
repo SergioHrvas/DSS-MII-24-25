@@ -1,4 +1,5 @@
 package com.dss.spring.data.rest;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,15 +12,20 @@ public class CartService {
 	private final CartRepo cartRepo;
 	private final ProductRepo productRepo;
 	private final CartItemRepo cartItemRepo;
+	private final UserRepo userRepo;
 
-	public CartService(CartRepo cartRepo, ProductRepo productRepo, CartItemRepo cartItemRepo) {
+	public CartService(CartRepo cartRepo, ProductRepo productRepo, CartItemRepo cartItemRepo, UserRepo userRepo) {
 		this.cartRepo = cartRepo;
 		this.productRepo = productRepo;
 		this.cartItemRepo = cartItemRepo;
+		this.userRepo = userRepo;
 	}
 	
-	public List<CartItemDTO> getProductsCart(Long id){
-		Cart cart = cartRepo.findById(id).orElseThrow(() -> new IllegalArgumentException());
+	public List<CartItemDTO> getProductsCart(Authentication authentication){
+		String userName = authentication.getName();
+		System.out.println(userName);
+		User user = userRepo.findByUsername(userName).orElseThrow(() -> new IllegalArgumentException());
+		Cart cart = user.getCart();
 		List<CartItem> items = cart.getItems();
 		List<CartItemDTO> itemData = new ArrayList<CartItemDTO>();
 		
@@ -34,11 +40,12 @@ public class CartService {
 		return itemData;
 	}
 	
-	public void addItemCart(Long id, Long idProduct, int num){
-		//Obtenemos el carro
-		Cart cart = cartRepo.findById(id).orElseThrow(() -> new IllegalArgumentException());
+	public void addItemCart(Authentication authentication, Long idProduct, int num){
+		String userName = authentication.getName();
+		
+		User user = userRepo.findByUsername(userName).orElseThrow(() -> new IllegalArgumentException());
+		Cart cart = user.getCart();
 
-    	
 		Optional<CartItem> existingItem = cart.getItems().stream().
 				filter(item -> item.getIdProduct().equals(idProduct)).findFirst();
 		
@@ -57,9 +64,12 @@ public class CartService {
 		cartRepo.save(cart);
 	}
 	
-	public boolean updateOrDeleteProductCart(Long id, Long idProduct, int num){
-		Cart cart = cartRepo.findById(id).orElseThrow(() -> new IllegalArgumentException());
-		
+	public boolean updateOrDeleteProductCart(Authentication authentication, Long idProduct, int num){
+		String userName = authentication.getName();
+
+		User user = userRepo.findByUsername(userName).orElseThrow(() -> new IllegalArgumentException());
+		Cart cart = user.getCart();
+
 		boolean deleted = false;
 		
 		Optional<CartItem> existingItem = cart.getItems().stream().

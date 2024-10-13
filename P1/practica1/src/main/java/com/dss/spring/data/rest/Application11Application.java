@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.client.RestTemplate;
 
 
@@ -25,6 +26,7 @@ public class Application11Application {
 	@Bean
     CommandLineRunner jpaSample(ProductRepo productRepo) {
       return (args) -> {
+
 	//Almacenar los 2 "instancias" de Todo en la base de datos H2   
    /* productRepo.save(new Product());
     Product product = new Product();

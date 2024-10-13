@@ -24,4 +24,10 @@ public class CartItem{
 	
 	private Long idProduct;
 	private int num;
+	
+    @Override
+    public String toString() {
+        // Evita imprimir el Cart completo para evitar recursión
+        return "CartItem{id=" + this.id + ", product=" + idProduct + "}";
+    }
 }

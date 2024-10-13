@@ -1,16 +1,10 @@
 // Función para cargar items del carro con autenticación básica
 async function loadItems() {
-    const username = 'admin'; // Cambia esto por tu nombre de usuario
-    const password = 'admin'; // Cambia esto por tu contraseña
 
-    // Codificar las credenciales en Base64
-    const credentials = btoa(`${username}:${password}`);
 	    try {
-        const response = await fetch('/api/cart/1', {
+        const response = await fetch(`/api/cart`, {
             method: 'GET',
-            headers: {
-                'Authorization': `Basic ${credentials}`, // Añadir el encabezado de autorización
-            }
+
         });
 				
         if (!response.ok) {
@@ -32,13 +26,13 @@ async function loadItems() {
                 <td>${item.productName}</td>
                 <td>$${item.productPrice.toFixed(2)}</td>
 				<td>${item.productNum}</td>
-				<td>$${item.productNum * item.productPrice.toFixed(2)}</td>
+				<td>$${(item.productNum * item.productPrice).toFixed(2)}</td>
                 <td>
                     <button onClick='deleteItem(${item.productId}, ${item.productNum})' class="btn btn-danger btn-sm">Eliminar</button>
                 </td>
             `;
             itemsTable.appendChild(row);
-			document.getElementById("cartTotal").innerHTML = "$ " + sum;
+			document.getElementById("cartTotal").innerHTML = "$ " + sum.toFixed(2);
         });
     } catch (error) {
         console.error('Error loading products:', error);
@@ -56,7 +50,7 @@ async function deleteItem(idProduct, num){
 
 
 	try {
-	    const response = await fetch(`/api/cart/1?idProduct=${idProduct}&num=${num}`, {
+	    const response = await fetch(`/api/cart?idProduct=${idProduct}&num=${num}`, {
 	        method: 'DELETE',
 	        headers: {
 	            'Authorization': `Basic ${credentials}`, // Añadir el encabezado de autorización

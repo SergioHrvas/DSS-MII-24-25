@@ -14,7 +14,7 @@ public class RootUriController {
         return "index"; // Thymeleaf buscará el archivo en templates/index.html
     }
     
-    @GetMapping("/login")
+   @GetMapping("/login")
     public String getLogin() {
         return "login";
     }

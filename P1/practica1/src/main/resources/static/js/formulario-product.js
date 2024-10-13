@@ -1,3 +1,14 @@
+
+var pathArray = window.location.pathname.split('/');
+var modo = pathArray[1] == "nuevo-producto" ? 0 : 1;
+
+if(modo == 0){
+	// Cargar productos al cargar la página
+	window.onload = loadProducts;
+}
+else{
+	document.getElementById("productTable").innerHTML = ""
+}
 // Función para verificar si un valor es un ID válido
 function isValidId(id) {
     return /^\d+$/.test(id); // Verifica si el ID solo contiene dígitos
@@ -53,16 +64,8 @@ async function saveProduct(event) {
 	event.preventDefault(); // Evitar que el formulario se envíe de manera tradicional
 
 	// Extraer parámetros de la URL
-
 	const path = window.location.pathname; // Obtiene la ruta completa
 	const productId = path.split('/').pop(); // Toma el último segmento de la ruta
-
-
-	const username = 'admin'; // Cambia esto por tu nombre de usuario
-	const password = 'admin'; // Cambia esto por tu contraseña
-
-	// Codificar las credenciales en Base64
-	const credentials = btoa(`${username}:${password}`);
 
 	const nombre = document.getElementById('nombre').value;
 	const precio = document.getElementById('precio').value;
@@ -78,7 +81,6 @@ async function saveProduct(event) {
 			const response = await fetch('/api/products', {
 				method: 'POST',
 				headers: {
-					'Authorization': `Basic ${credentials}`, // Añadir el encabezado de autorización
 					'Content-Type': 'application/json'
 				},
 				body: json_body
@@ -86,7 +88,7 @@ async function saveProduct(event) {
 				then(response => response.json().
 					then(data => {
 						console.log("Producto creado", data)
-					    window.location.href = '/productos';}
+					    window.location.href = '/nuevo-producto';}
 					).
 					catch(error => console.log("Error: " + error)));
 	} catch (error) {
@@ -94,3 +96,53 @@ async function saveProduct(event) {
 	}
 }
 
+// Función para cargar productos con autenticación básica
+async function loadProducts() {
+	    try {
+        const response = await fetch('/api/products', {
+            method: 'GET',
+        });
+			
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status}`);
+        }
+		
+
+        const products = await response.json();
+        const productTable = document.getElementById('productTable').querySelector('tbody');
+        productTable.innerHTML = ''; // Limpiar la tabla
+
+        products.forEach(product => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${product.id}</td>
+                <td>${product.nombre}</td>
+                <td>$${product.precio.toFixed(2)}</td>
+                <td>
+				<div class="input-group">
+				  	<a href="editar-producto/${product.id}" class="btn btn-warning ms-2">Editar</a>
+                   <button onClick="deleteProduct(${product.id})" class="btn btn-danger ms-2">Eliminar</button>
+                 </div>
+				 </td>
+            `;
+            productTable.appendChild(row);
+			
+        });
+    } catch (error) {
+        console.error('Error loading products:', error);
+    }
+}
+
+//Función para eliminar un producto
+async function deleteProduct(id){
+
+		try {
+	    const response = await fetch('/api/products/' + id, {
+	        method: 'DELETE',
+	    });
+		
+		location.reload()
+	} catch (error) {
+	    console.error('Error deleting product:', error);
+	}
+}

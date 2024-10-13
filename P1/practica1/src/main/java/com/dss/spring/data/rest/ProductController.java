@@ -45,7 +45,7 @@ public class ProductController {
     } 
     
 
-    @GetMapping("/export/products")
+    @GetMapping("/export")
     public ResponseEntity<byte[]> exportProducts() {
         byte[] sqlScript = databaseExportService.exportDatabaseToSql();
         return ResponseEntity.ok()
