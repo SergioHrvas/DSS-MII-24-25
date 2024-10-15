@@ -38,4 +38,8 @@ public class ProductService {
 		}
 		return false;
 	}
+	
+	public List<Product> searchAndFilterProducts(String name, Double minPrice, Double maxPrice) {
+	    return productRepo.findByNombreContainingIgnoreCaseAndPrecioBetween(name, minPrice, maxPrice);
+	}
 }

@@ -77,5 +77,46 @@ async function addProduct(idProduct, num) {
 	}
 }
 
-// Cargar productos al cargar la página
+
+// Función para cargar productos con autenticación básica
+async function searchProducts() {
+	var productName = document.getElementById("productName").value;
+
+	var minPrice = document.getElementById("minPrice").value;
+	var maxPrice = document.getElementById("maxPrice").value;
+	try {
+		const response = await fetch(`/api/products/searchAndFilter?name=${productName}&minPrice=${minPrice}&maxPrice=${maxPrice}`, {
+			method: 'GET',
+		});
+
+		if (!response.ok) {
+			throw new Error(`Error: ${response.status}`);
+		}
+		
+		const products = await response.json();
+		const productTable = document.getElementById('productTable').querySelector('tbody');
+		productTable.innerHTML = ''; // Limpiar la tabla
+
+		products.forEach(product => {
+			const row = document.createElement('tr');
+			row.innerHTML = `
+                <td>${product.id}</td>
+                <td>${product.nombre}</td>
+                <td>$${product.precio.toFixed(2)}</td>
+                <td>
+				<div class="input-group">
+				    	<button onClick="addProduct(${product.id}, this.nextElementSibling.value)" type="button" class="btn btn-success">Añadir</button>
+				  		<input type="number" value="1" min="1" class="form-control ms-2" style="max-width: 100px;">
+                 </div>
+				 </td>
+            `;
+			productTable.appendChild(row);
+
+		});
+	} catch (error) {
+		console.error('Error loading products:', error);
+	}
+}
+
+// Cargar todos los productos al cargar la página
 window.onload = loadProducts;

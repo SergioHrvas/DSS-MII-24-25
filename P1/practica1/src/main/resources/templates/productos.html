@@ -41,6 +41,32 @@
 	</header>
 
 	<div class="container mt-5">
+		<div class="container mt-4 mb-4">
+			<div class="row">
+				<!-- Input para filtrar precio mínimo -->
+				<div class="col-md-3">
+					<label for="minPrice" class="form-label">Precio mínimo</label>
+					<input type="number" class="form-control" id="minPrice" placeholder="Mínimo" min="0" step="1">
+				</div>
+
+				<!-- Input para filtrar precio máximo -->
+				<div class="col-md-3">
+					<label for="maxPrice" class="form-label">Precio máximo</label>
+					<input type="number" class="form-control" id="maxPrice" placeholder="Máximo" min="0" step="1">
+				</div>
+
+				<!-- Input para buscar por nombre -->
+				<div class="col-md-4">
+					<label for="productName" class="form-label">Buscar por nombre</label>
+					<input type="text" class="form-control" id="productName" placeholder="Nombre del producto">
+				</div>
+
+				<!-- Botón para buscar -->
+				<div class="col-md-2 d-flex align-items-end">
+					<button type="button" class="btn btn-primary w-100" onclick="searchProducts()">Buscar</button>
+				</div>
+			</div>
+		</div>
 		<table class="table table-bordered" id="productTable">
 			<thead>
 				<tr>
