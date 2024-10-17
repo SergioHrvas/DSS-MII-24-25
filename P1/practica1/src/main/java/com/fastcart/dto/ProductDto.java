@@ -6,11 +6,13 @@ import lombok.Data;
 
 @Data
 public class ProductDto {
-    private String name;
-    private double price;
+	private Long id;
+    private String nombre;
+    private double precio;
     
-    public ProductDto(String name, double price) {
-        this.name = name; 
-        this.price = price;
+    public ProductDto(String nombre, double precio, Long id) {
+        this.nombre = nombre; 
+        this.precio = precio;
+        this.id = id;
     }
 }

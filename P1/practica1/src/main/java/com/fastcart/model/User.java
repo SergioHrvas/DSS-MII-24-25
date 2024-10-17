@@ -2,6 +2,7 @@ package com.fastcart.model;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -42,6 +43,12 @@ public class User implements UserDetails {
 	@JsonManagedReference
 	private Cart cart;
 
+	@Override
+	public int hashCode() {
+	    // No incluir el campo "cart" para evitar recursión
+	    return Objects.hash(id, username);  // Asegúrate de usar campos que no causen recursión
+	}
+	
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;

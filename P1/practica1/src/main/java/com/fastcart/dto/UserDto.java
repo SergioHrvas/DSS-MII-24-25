@@ -27,7 +27,6 @@ public class UserDto {
 	  this.password = password;
 	 }
 
-
 	 @Override
 	 public String toString() {
 	  return "UserDto [username=" + username + ", password=" + password + "]";

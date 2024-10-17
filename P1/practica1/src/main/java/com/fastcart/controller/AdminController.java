@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,16 +30,16 @@ public class AdminController {
 	@PostMapping(value = "/products")
 	public Product saveProduct(@RequestBody ProductDto newProduct) {
 		return productService.saveProduct(newProduct);
-		System.out.println(newProduct)
+	}
+	
+	@PutMapping(value = "/products")
+	public Product editProduct(@RequestBody ProductDto newProduct) {
+		return productService.editProduct(newProduct);
 	}
 
 	@DeleteMapping("/products/{id}")
 	public boolean deleteProduct(@PathVariable Long id) {
-		if (productService.doesProductExist(id)) {
-			productService.deleteProduct(id);
-			return true;
-		}
-		return false;
+		return 	productService.deleteProduct(id);
 	}
 
 	@GetMapping("/products/export")

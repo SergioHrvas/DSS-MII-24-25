@@ -1,5 +1,3 @@
-
-
 // Función para cargar productos con autenticación básica
 async function loadProducts() {
 	try {

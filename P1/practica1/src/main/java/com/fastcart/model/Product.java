@@ -24,7 +24,7 @@ public class Product{
 	private String nombre;
 	private double precio;
 	
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonBackReference
     private Set<CartItem> cartItems;  // Cambiado a colección
 	
