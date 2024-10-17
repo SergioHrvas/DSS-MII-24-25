@@ -1,6 +1,7 @@
 package com.fastcart.service;
 import org.springframework.stereotype.Service;
 
+import com.fastcart.dto.ProductDto;
 import com.fastcart.model.Product;
 import com.fastcart.repository.ProductRepo;
 
@@ -27,8 +28,12 @@ public class ProductService {
 		return productRepo.existsById(id);
 	}
 	
-	public Product saveProduct(Product product) {
-		return productRepo.save(product);
+	public Product saveProduct(ProductDto product) {
+		Product new_product = new Product();
+		
+		new_product.setNombre(product.getName());
+		new_product.setPrecio(product.getPrice());
+		return productRepo.save(new_product);
 	}
 	
 	public boolean deleteProduct(Long id) {

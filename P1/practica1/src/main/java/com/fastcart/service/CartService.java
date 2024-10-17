@@ -4,7 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import com.fastcart.dto.CartItemDTO;
+import com.fastcart.dto.CartItemDto;
 import com.fastcart.repository.CartItemRepo;
 import com.fastcart.model.Cart;
 import com.fastcart.model.CartItem;
@@ -45,18 +45,18 @@ public class CartService {
 		this.userRepo = userRepo;
 	}
 	
-	public List<CartItemDTO> getProductsCart(Authentication authentication){
+	public List<CartItemDto> getProductsCart(Authentication authentication){
 		String userName = authentication.getName();
 		System.out.println(userName);
 		User user = userRepo.findByUsername(userName).orElseThrow(() -> new IllegalArgumentException());
 		Cart cart = user.getCart();
 		List<CartItem> items = cart.getItems();
-		List<CartItemDTO> itemData = new ArrayList<CartItemDTO>();
+		List<CartItemDto> itemData = new ArrayList<CartItemDto>();
 		
 		for(CartItem item : items) {
 			Optional<Product> product = productRepo.findById(item.getProduct().getId());
 			if(product.isPresent()) {
-				itemData.add(new CartItemDTO(product.get(), item.getNum()));
+				itemData.add(new CartItemDto(product.get(), item.getNum()));
 			}
 			
 		}

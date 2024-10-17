@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fastcart.dto.ProductDto;
 import com.fastcart.model.Product;
 import com.fastcart.service.DatabaseExportService;
 import com.fastcart.service.ProductService;
@@ -26,8 +27,9 @@ public class AdminController {
 	}
 
 	@PostMapping(value = "/products")
-	public Product saveProduct(@RequestBody Product newProduct) {
+	public Product saveProduct(@RequestBody ProductDto newProduct) {
 		return productService.saveProduct(newProduct);
+		System.out.println(newProduct)
 	}
 
 	@DeleteMapping("/products/{id}")

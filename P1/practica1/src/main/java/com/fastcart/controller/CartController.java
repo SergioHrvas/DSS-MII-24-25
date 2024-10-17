@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-import com.fastcart.dto.CartItemDTO;
+import com.fastcart.dto.CartItemDto;
 import com.fastcart.service.CartService;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
@@ -16,13 +16,13 @@ import java.util.List;
 @RequestMapping("/api/cart")
 public class CartController {
     private final CartService cartService;
-
+    
     public CartController(CartService cartService) {
         this.cartService = cartService;
     }
     
     @GetMapping
-    List<CartItemDTO> all(Authentication authentication){
+    List<CartItemDto> all(Authentication authentication){
     	return cartService.getProductsCart(authentication);
     }
     
