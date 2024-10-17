@@ -2,6 +2,8 @@ package com.fastcart.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,6 +27,7 @@ public class Cart{
     
     @OneToOne
     @JoinColumn(name = "user_id")
+    @JsonBackReference  // Añadir esta anotación
     private User user;
     
 	
@@ -34,7 +37,7 @@ public class Cart{
 	
 	boolean deleteItem(CartItem new_item) {
 		for(CartItem item : getItems()) {
-			if(item.getIdProduct() == new_item.getIdProduct()) {
+			if(item.getProduct().getId() == new_item.getProduct().getId()) {
 				if(item.getNum() - new_item.getNum() < 0) {
 					items.remove(item);
 				}

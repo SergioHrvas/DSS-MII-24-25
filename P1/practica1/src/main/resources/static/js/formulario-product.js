@@ -1,4 +1,3 @@
-
 var pathArray = window.location.pathname.split('/');
 var modo = pathArray[1] == "nuevo-producto" ? 0 : 1;
 
@@ -50,9 +49,11 @@ async function cargarDatosProducto(id) {
 	}
 }
 
-
+/*
 async function saveProduct(event) {
-	event.preventDefault(); // Evitar que el formulario se envíe de manera tradicional
+	console.log("aas")
+event.preventDefault(); // Evitar que el formulario se envíe de manera tradicional
+	console.log("fddsf")
 
 	// Extraer parámetros de la URL
 	const path = window.location.pathname; // Obtiene la ruta completa
@@ -84,6 +85,41 @@ async function saveProduct(event) {
 	} catch (error) {
 		console.error('Error creating product:', error);
 	}
+}*/
+
+async function saveProduct(event){
+	event.preventDefault();
+	console.log("Aaa");
+	// Extraer parámetros de la URL
+		const path = window.location.pathname; // Obtiene la ruta completa
+		const productId = path.split('/').pop(); // Toma el último segmento de la ruta
+
+		const nombre = document.getElementById('nombre').value;
+		const precio = document.getElementById('precio').value;
+		
+		var json_body;
+		if(isValidId(productId)){
+					json_body = JSON.stringify({"id": productId, nombre, precio})
+				} else{
+					json_body = JSON.stringify({nombre, precio})
+				}
+				try {
+
+						const response = await fetch('/admin/api/products', {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json'
+							},
+							body: json_body
+						}).
+							then(response => response.json().
+								then(data => {
+								    window.location.href = '/nuevo-producto';}
+								).
+								catch(error => console.error("Error: " + error)));
+				} catch (error) {
+					console.error('Error creating product:', error);
+				}
 }
 
 // Función para cargar productos con autenticación básica

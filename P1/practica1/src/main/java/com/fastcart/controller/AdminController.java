@@ -25,7 +25,7 @@ public class AdminController {
 		this.databaseExportService = databaseExportService;
 	}
 
-	@PostMapping("/products")
+	@PostMapping(value = "/products")
 	public Product saveProduct(@RequestBody Product newProduct) {
 		return productService.saveProduct(newProduct);
 	}

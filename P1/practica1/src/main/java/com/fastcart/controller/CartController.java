@@ -39,9 +39,9 @@ public class CartController {
     }
     
     
-    @GetMapping("/{cartId}/pdf")
-    public ResponseEntity<byte[]> getCartPdf(@PathVariable Long cartId) {
-        byte[] pdfBytes = cartService.generateCartPdf(cartId);
+    @GetMapping("/pdf")
+    public ResponseEntity<byte[]> getCartPdf(Authentication authentication) {
+        byte[] pdfBytes = cartService.generateCartPdf(authentication);
      // Establecer los headers para la descarga del archivo
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_PDF);

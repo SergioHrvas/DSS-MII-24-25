@@ -54,7 +54,7 @@ public class CartService {
 		List<CartItemDTO> itemData = new ArrayList<CartItemDTO>();
 		
 		for(CartItem item : items) {
-			Optional<Product> product = productRepo.findById(item.getIdProduct());
+			Optional<Product> product = productRepo.findById(item.getProduct().getId());
 			if(product.isPresent()) {
 				itemData.add(new CartItemDTO(product.get(), item.getNum()));
 			}
@@ -69,9 +69,11 @@ public class CartService {
 		
 		User user = userRepo.findByUsername(userName).orElseThrow(() -> new IllegalArgumentException());
 		Cart cart = user.getCart();
-
+		Product product = productRepo.findById(idProduct).get();
+		
+		
 		Optional<CartItem> existingItem = cart.getItems().stream().
-				filter(item -> item.getIdProduct().equals(idProduct)).findFirst();
+				filter(item -> item.getProduct().getId().equals(idProduct)).findFirst();
 		
 		if(existingItem.isPresent()) {
 			CartItem item = existingItem.get();
@@ -80,7 +82,7 @@ public class CartService {
 		else {
 			CartItem newCartItem = new CartItem();
 			newCartItem.setNum(num);
-			newCartItem.setIdProduct(idProduct);
+			newCartItem.setProduct(product);
 			newCartItem.setCart(cart);
 			cart.addItem(newCartItem);
 		}
@@ -97,7 +99,7 @@ public class CartService {
 		boolean deleted = false;
 		
 		Optional<CartItem> existingItem = cart.getItems().stream().
-				filter(item -> item.getIdProduct().equals(idProduct)).findFirst();
+				filter(item -> item.getProduct().getId().equals(idProduct)).findFirst();
 		
 		if(existingItem.isPresent()) {
 			CartItem item = existingItem.get();
@@ -117,8 +119,12 @@ public class CartService {
 		return deleted;
 	}
 	
-	public byte[] generateCartPdf(Long cartId) {
-        Cart cart = cartRepo.getById(cartId);
+	public byte[] generateCartPdf(Authentication authentication) {
+		String userName = authentication.getName();
+
+		User user = userRepo.findByUsername(userName).orElseThrow(() -> new IllegalArgumentException());
+		Cart cart = user.getCart();
+		
         // Lógica para generar PDF con los detalles del carrito
         
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -165,17 +171,12 @@ public class CartService {
         table.addCell(header1);
         table.addCell(header2);
         table.addCell(header3);
-
-        double precio = 0;
         
-        System.out.println(cart.getItems());
         // Añadimos los productos del carrito
         for (CartItem item : cart.getItems()) {
-        	Product product = productRepo.getById(item.getIdProduct());
-        	precio += product.getPrecio();
-            PdfPCell productCell = new PdfPCell(new Phrase(product.getNombre(), normalFont));
+            PdfPCell productCell = new PdfPCell(new Phrase(item.getProduct().getNombre(), normalFont));
             PdfPCell quantityCell = new PdfPCell(new Phrase(String.valueOf(item.getNum()), normalFont));
-            PdfPCell priceCell = new PdfPCell(new Phrase(String.format("%.2f €", product.getPrecio()), normalFont));
+            PdfPCell priceCell = new PdfPCell(new Phrase(String.format("%.2f €", item.getProduct().getPrecio()), normalFont));
 
             // Alineación de contenido
             productCell.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -191,10 +192,10 @@ public class CartService {
         document.add(table);
 
         // Precio total del carrito
-        //double totalPrice = cart.getItems().stream()
-        //        .mapToDouble(item -> item.getProduct().getPrice() * item.getQuantity())
-        //        .sum();
-        document.add(new Paragraph("Total: " + String.format("%.2f", precio) + " €", titleFont));
+        double totalPrice = cart.getItems().stream()
+                .mapToDouble(item -> item.getProduct().getPrecio() * item.getNum())
+                .sum();
+        document.add(new Paragraph("Total: " + String.format("%.2f", totalPrice) + " €", titleFont));
 
         // Cerrar el documento
         document.close();

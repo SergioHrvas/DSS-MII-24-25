@@ -36,21 +36,6 @@ async function loadProducts() {
 	}
 }
 
-//Función para eliminar un producto
-async function deleteProduct(id) {
-
-	try {
-		const response = await fetch('/api/products/' + id, {
-			method: 'DELETE',
-		});
-
-		location.reload()
-	} catch (error) {
-		console.error('Error deleting product:', error);
-	}
-}
-
-
 //Función para añadir  un producto al carro
 async function addProduct(idProduct, num) {
 	json_body = JSON.stringify({
@@ -119,4 +104,4 @@ async function searchProducts() {
 }
 
 // Cargar todos los productos al cargar la página
-window.onload = loadProducts;
+window.onload = loadProducts()

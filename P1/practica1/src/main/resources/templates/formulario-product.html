@@ -27,6 +27,8 @@
 					<li class="nav-item">
 						<a class="nav-link" href="my-cart">Mi carro</a>
 					</li>
+					<li class="nav-item" id="log">
+					</li>
 				</ul>
 				<!-- Botón alineado a la derecha -->
 				<a class="btn btn-primary ms-auto" href="/admin/api/products/export">Descargar DB (SQL)</a>
@@ -40,7 +42,7 @@
 		<p id="description">Agrega un producto nuevo a la lista</p>
 	</header>
 	<div class="container mt-5">
-		<form id="productForm" onsubmit="return saveProduct(event)">
+		<form id="productForm" onSubmit="return saveProduct(event)">
 			<div class="mb-3">
 				<label for="nombre" class="form-label">Nombre del Producto</label>
 				<input type="text" class="form-control" id="nombre" name="nombre" required>
@@ -68,6 +70,8 @@
 			</tbody>
 		</table>
 	</div>
+	<script th:src="@{/js/cookie.js}"></script>
+
 	<script th:src="@{/js/formulario-product.js}"></script>
 </body>
 <footer class="bg-body-tertiary text-center text-lg-start">

@@ -18,5 +18,9 @@ public class RootUriController {
     public String getLogin() {
         return "login";
     }
-    
+   
+   @GetMapping("/register")
+   public String register() {
+       return "register";
+   }
 }

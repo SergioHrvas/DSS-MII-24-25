@@ -2,6 +2,7 @@ package com.fastcart.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,12 +23,17 @@ public class CartItem{
 	@ManyToOne
 	private Cart cart; // Relación con el carrito
 	
-	private Long idProduct;
+	//private Long idProduct;
+    
+	@ManyToOne
+    @JsonManagedReference
+	private Product product;
+
 	private int num;
 	
     @Override
     public String toString() {
         // Evita imprimir el Cart completo para evitar recursión
-        return "CartItem{id=" + this.id + ", product=" + idProduct + "}";
+        return "CartItem{id=" + this.id + ", product=" + product.getId() + "}";
     }
 }
