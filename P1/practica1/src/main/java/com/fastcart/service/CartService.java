@@ -1,4 +1,6 @@
 package com.fastcart.service;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
@@ -11,11 +13,18 @@ import com.fastcart.model.User;
 import com.fastcart.repository.CartRepo;
 import com.fastcart.repository.ProductRepo;
 import com.fastcart.repository.UserRepo;
+import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -111,28 +120,91 @@ public class CartService {
 	public byte[] generateCartPdf(Long cartId) {
         Cart cart = cartRepo.getById(cartId);
         // Lógica para generar PDF con los detalles del carrito
+        
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        Document document = new Document();
+        
+        try { 
 
-        try {
-            Document document = new Document();
-            PdfWriter.getInstance(document, baos);
-            document.open();
-            document.add(new Paragraph("Carrito de compras"));
-            document.add(new Paragraph("ID del carrito: " + cart.getId()));
-            document.add(new Paragraph("Productos:"));
+        PdfWriter pdfWriter = PdfWriter.getInstance(document, baos); //Error here        
+     // Abrimos el documento
+        document.open();
 
-            for (CartItem item : cart.getItems()) {
-                document.add(new Paragraph("Producto: " + item.getIdProduct()));
-                document.add(new Paragraph("Cantidad: " + item.getNum()));
-                document.add(new Paragraph("Precio: " + "SSDSFFD"));
-            }
+        // Estilos de fuente
+        Font titleFont = new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD, BaseColor.BLUE);
+        Font headerFont = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD, BaseColor.WHITE);
+        Font normalFont = new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, BaseColor.BLACK);
 
-            document.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        // Título del documento
+        Paragraph title = new Paragraph("Carrito de compras", titleFont);
+        title.setAlignment(Element.ALIGN_CENTER);
+        document.add(title);
+        document.add(new Paragraph("Usuario: " + cart.getUser().getUsername(), normalFont));
+        document.add(new Paragraph(" ")); // Espacio en blanco
+
+        // Tabla de productos
+        PdfPTable table = new PdfPTable(3); // 3 columnas: Producto, Cantidad, Precio
+        table.setWidthPercentage(100); // Tabla a pantalla completa
+        table.setSpacingBefore(10f);
+        table.setSpacingAfter(10f);
+
+        // Encabezados
+        PdfPCell header1 = new PdfPCell(new Phrase("Producto", headerFont));
+        PdfPCell header2 = new PdfPCell(new Phrase("Cantidad", headerFont));
+        PdfPCell header3 = new PdfPCell(new Phrase("Precio", headerFont));
+
+        // Colores y alineación para el encabezado
+        header1.setBackgroundColor(BaseColor.DARK_GRAY);
+        header1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        header2.setBackgroundColor(BaseColor.DARK_GRAY);
+        header2.setHorizontalAlignment(Element.ALIGN_CENTER);
+        header3.setBackgroundColor(BaseColor.DARK_GRAY);
+        header3.setHorizontalAlignment(Element.ALIGN_CENTER);
+
+        // Agregar encabezados a la tabla
+        table.addCell(header1);
+        table.addCell(header2);
+        table.addCell(header3);
+
+        double precio = 0;
+        
+        System.out.println(cart.getItems());
+        // Añadimos los productos del carrito
+        for (CartItem item : cart.getItems()) {
+        	Product product = productRepo.getById(item.getIdProduct());
+        	precio += product.getPrecio();
+            PdfPCell productCell = new PdfPCell(new Phrase(product.getNombre(), normalFont));
+            PdfPCell quantityCell = new PdfPCell(new Phrase(String.valueOf(item.getNum()), normalFont));
+            PdfPCell priceCell = new PdfPCell(new Phrase(String.format("%.2f €", product.getPrecio()), normalFont));
+
+            // Alineación de contenido
+            productCell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            quantityCell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            priceCell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+
+            table.addCell(productCell);
+            table.addCell(quantityCell);
+            table.addCell(priceCell);
         }
 
+        // Añadir la tabla al documento
+        document.add(table);
+
+        // Precio total del carrito
+        //double totalPrice = cart.getItems().stream()
+        //        .mapToDouble(item -> item.getProduct().getPrice() * item.getQuantity())
+        //        .sum();
+        document.add(new Paragraph("Total: " + String.format("%.2f", precio) + " €", titleFont));
+
+        // Cerrar el documento
+        document.close();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return new byte[0];
+        }
         return baos.toByteArray();
-    }
+
+	}
 	
 }

@@ -49,8 +49,8 @@ public class CartController {
         headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
 
         return ResponseEntity.ok()
-                .header(headers)
-                .contentType(MediaType.APPLICATION_PDF)
+        		.headers(headers)
+        		.contentType(MediaType.APPLICATION_PDF)
                 .body(pdfBytes);
     }
 
