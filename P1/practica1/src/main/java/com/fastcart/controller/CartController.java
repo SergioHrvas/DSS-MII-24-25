@@ -1,5 +1,7 @@
 package com.fastcart.controller;
 
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -7,6 +9,7 @@ import com.fastcart.dto.CartItemDTO;
 import com.fastcart.service.CartService;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import org.springframework.http.HttpHeaders;
 import java.util.List;
 
 @RestController
@@ -33,6 +36,23 @@ public class CartController {
     @DeleteMapping
     public boolean deleteCartItem(@RequestParam Long idProduct, @RequestParam int num, Authentication authentication) {
     	return cartService.updateOrDeleteProductCart(authentication, idProduct, num);
-    } 
+    }
+    
+    
+    @GetMapping("/{cartId}/pdf")
+    public ResponseEntity<byte[]> getCartPdf(@PathVariable Long cartId) {
+        byte[] pdfBytes = cartService.generateCartPdf(cartId);
+     // Establecer los headers para la descarga del archivo
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("attachment", "cart.pdf");
+        headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+
+        return ResponseEntity.ok()
+                .header(headers)
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(pdfBytes);
+    }
+
         
 }

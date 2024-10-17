@@ -11,10 +11,15 @@ import com.fastcart.model.User;
 import com.fastcart.repository.CartRepo;
 import com.fastcart.repository.ProductRepo;
 import com.fastcart.repository.UserRepo;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 
 
 @Service
@@ -102,5 +107,32 @@ public class CartService {
 		
 		return deleted;
 	}
+	
+	public byte[] generateCartPdf(Long cartId) {
+        Cart cart = cartRepo.getById(cartId);
+        // Lógica para generar PDF con los detalles del carrito
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+        try {
+            Document document = new Document();
+            PdfWriter.getInstance(document, baos);
+            document.open();
+            document.add(new Paragraph("Carrito de compras"));
+            document.add(new Paragraph("ID del carrito: " + cart.getId()));
+            document.add(new Paragraph("Productos:"));
+
+            for (CartItem item : cart.getItems()) {
+                document.add(new Paragraph("Producto: " + item.getIdProduct()));
+                document.add(new Paragraph("Cantidad: " + item.getNum()));
+                document.add(new Paragraph("Precio: " + "SSDSFFD"));
+            }
+
+            document.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return baos.toByteArray();
+    }
 	
 }
