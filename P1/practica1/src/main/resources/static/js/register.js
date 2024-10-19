@@ -14,6 +14,7 @@
            })
            .then(response => {
                if (!response.ok) {
+				   document.getElementById("errorMessage").innerHTML = "Error al registrar el usuario"
                    return response.json().then(errorData => {
                        throw new Error(errorData.message || 'Error al registrar el usuario');
                    });

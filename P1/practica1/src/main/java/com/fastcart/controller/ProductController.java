@@ -4,7 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.fastcart.model.Product;
-import com.fastcart.service.ProductService;
+import com.fastcart.service.interf.ProductService;
 
 import java.util.List;
 
@@ -26,15 +26,14 @@ public class ProductController {
 	public ResponseEntity<Product> getProductById(@PathVariable Long id) {
 		return productService.getProductById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
 	}
-	
+
 	@GetMapping("/searchAndFilter")
 	public ResponseEntity<List<Product>> searchAndFilterProducts(
-	        @RequestParam(required = false, defaultValue = "") String name,
-	        @RequestParam(required = false, defaultValue = "0") Double minPrice,
-	        @RequestParam(required = false, defaultValue = "10000") Double maxPrice) {
-	    List<Product> products = productService.searchAndFilterProducts(name, minPrice, maxPrice);
-	    return ResponseEntity.ok(products);
+			@RequestParam(required = false, defaultValue = "") String name,
+			@RequestParam(required = false, defaultValue = "0") Double minPrice,
+			@RequestParam(required = false, defaultValue = "10000") Double maxPrice) {
+		List<Product> products = productService.searchAndFilterProducts(name, minPrice, maxPrice);
+		return ResponseEntity.ok(products);
 	}
-
 
 }

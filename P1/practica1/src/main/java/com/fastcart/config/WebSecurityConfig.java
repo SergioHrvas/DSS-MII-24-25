@@ -2,7 +2,6 @@ package com.fastcart.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -14,7 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
-import com.fastcart.service.UserDetailsServiceImpl;
+import com.fastcart.service.impl.UserDetailsServiceImpl;
 
 import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
 

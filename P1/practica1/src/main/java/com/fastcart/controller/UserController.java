@@ -11,24 +11,22 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fastcart.dto.UserDto;
 import com.fastcart.model.Role;
 import com.fastcart.model.User;
-import com.fastcart.repository.UserRepo;
-import com.fastcart.service.UserService;
+import com.fastcart.service.interf.UserService;
 
 @RestController
 @RequestMapping("/api/user")
 
 public class UserController {
-	
-    @Autowired
-	UserService userService;
-	
-    @PostMapping("register")
-    public ResponseEntity<User> register(@RequestBody UserDto user) {
-		System.out.println(user);
-		User new_user = userService.register(user);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(new_user);
-   
+	@Autowired
+	UserService userService;
+
+	@PostMapping("register")
+	public ResponseEntity<User> register(@RequestBody UserDto user) {
+		user.setRole(Role.ROLE_USER);
+		User new_user = userService.register(user);
 		
-    }
+		return ResponseEntity.status(HttpStatus.CREATED).body(new_user);
+
+	}
 }

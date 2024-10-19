@@ -5,27 +5,25 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
-import java.util.List;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import lombok.Data;
 
 @Entity
 @Data
-public class Product{
+public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String nombre;
 	private double precio;
-	
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonBackReference
-    private Set<CartItem> cartItems;  // Cambiado a colección
-	
+
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonBackReference
+	private Set<CartItem> cartItems; // Cambiado a colección
+
 }

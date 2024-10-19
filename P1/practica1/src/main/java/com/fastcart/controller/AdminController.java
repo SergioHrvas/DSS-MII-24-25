@@ -13,25 +13,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fastcart.dto.ProductDto;
 import com.fastcart.model.Product;
-import com.fastcart.service.DatabaseExportService;
-import com.fastcart.service.ProductService;
+import com.fastcart.service.interf.ProductService;
 
 @RestController
 @RequestMapping("/admin/api")
 public class AdminController {
-	private DatabaseExportService databaseExportService;
 	private final ProductService productService;
 
-	public AdminController(ProductService productService, DatabaseExportService databaseExportService) {
+	public AdminController(ProductService productService) {
 		this.productService = productService;
-		this.databaseExportService = databaseExportService;
 	}
 
 	@PostMapping(value = "/products")
 	public Product saveProduct(@RequestBody ProductDto newProduct) {
 		return productService.saveProduct(newProduct);
 	}
-	
+
 	@PutMapping(value = "/products")
 	public Product editProduct(@RequestBody ProductDto newProduct) {
 		return productService.editProduct(newProduct);
@@ -39,12 +36,12 @@ public class AdminController {
 
 	@DeleteMapping("/products/{id}")
 	public boolean deleteProduct(@PathVariable Long id) {
-		return 	productService.deleteProduct(id);
+		return productService.deleteProduct(id);
 	}
 
 	@GetMapping("/products/export")
 	public ResponseEntity<byte[]> exportProducts() {
-		byte[] sqlScript = databaseExportService.exportDatabaseToSql();
+		byte[] sqlScript = productService.exportProducts();
 		return ResponseEntity.ok().header("Content-Disposition", "attachment; filename=\"products.sql\"")
 				.contentType(MediaType.TEXT_PLAIN).body(sqlScript);
 	}

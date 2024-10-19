@@ -1,10 +1,14 @@
 package com.fastcart.dto;
 
+import com.fastcart.model.Role;
+
 public class UserDto {
 
 	 private String username;
 	 private String password;
 
+	 private Role role;
+	 
 	 public UserDto(String username, String password) {
 	  super();
 	  this.username = username;
@@ -25,6 +29,14 @@ public class UserDto {
 
 	 public void setPassword(String password) {
 	  this.password = password;
+	 }
+
+	 public Role getRole() {
+		  return role;
+	 }
+
+	 public void setRole(Role role) {
+		  this.role = role;
 	 }
 
 	 @Override
