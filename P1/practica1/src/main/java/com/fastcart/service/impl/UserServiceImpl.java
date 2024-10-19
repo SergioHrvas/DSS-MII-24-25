@@ -6,7 +6,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.fastcart.dto.UserDto;
 import com.fastcart.model.Cart;
 
 import com.fastcart.model.User;
@@ -31,11 +30,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	// Métodos
-	public User register(UserDto user) {
+	public String register(User user) {
 
 		// Verificar si el nombre de usuario ya existe
 		if (userRepo.findByUsername(user.getUsername()).isPresent()) {
-			throw new IllegalArgumentException("El nombre de usuario ya existe.");
+            return "El nombre de usuario ya está en uso."; 
 		}
 
 		// Creamos el usuario
@@ -53,8 +52,7 @@ public class UserServiceImpl implements UserService {
 		cart.setUser(usuario);
 		cartRepo.save(cart);
 
-		return usuario;
-
+        return null; // Si no hay errores, devuelvo null
 	}
 	
 	public boolean doesThisUserExist(String userName) {

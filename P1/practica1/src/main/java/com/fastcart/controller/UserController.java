@@ -1,32 +1,44 @@
 package com.fastcart.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fastcart.dto.UserDto;
 import com.fastcart.model.Role;
 import com.fastcart.model.User;
 import com.fastcart.service.interf.UserService;
 
-@RestController
-@RequestMapping("/api/user")
-
+@Controller
 public class UserController {
 
 	@Autowired
 	UserService userService;
-
-	@PostMapping("register")
-	public ResponseEntity<User> register(@RequestBody UserDto user) {
+	
+	@GetMapping("/register")
+	public String showRegistrationForm(Model model) {
+	    model.addAttribute("user", new User()); // Crea un nuevo objeto DTO
+	    return "register"; // Nombre de la plantilla
+	}
+	
+	@PostMapping("/user/register")
+	public String register(@ModelAttribute("user") User user, Model model) {
 		user.setRole(Role.ROLE_USER);
-		User new_user = userService.register(user);
+		String error = userService.register(user);
 		
-		return ResponseEntity.status(HttpStatus.CREATED).body(new_user);
+		
+	    if (error != null) {
+	        model.addAttribute("error", error); // Agregar el mensaje de error al modelo
+	        return "register"; // Regresar al formulario de registro
+	    }
+	    
+        return "redirect:/login"; // redirigir a una página de éxito
 
 	}
+	
 }

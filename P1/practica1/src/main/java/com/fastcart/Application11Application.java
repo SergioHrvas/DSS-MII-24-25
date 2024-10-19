@@ -6,9 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 
-import com.fastcart.dto.UserDto;
 import com.fastcart.model.Role;
-
+import com.fastcart.model.User;
 import com.fastcart.service.interf.UserService;
 
 @SpringBootApplication
@@ -21,12 +20,12 @@ public class Application11Application {
 	CommandLineRunner jpaSample(UserService userService) {
 		return (args) -> {
 			if (!userService.doesThisUserExist("admin")) {
-				UserDto admin = new UserDto("admin", "admin123");
+				User admin = new User();
 	            admin.setRole(Role.ROLE_ADMIN);
 	            userService.register(admin);
 	        }
 			if (!userService.doesThisUserExist("user")) {
-				UserDto user = new UserDto("user", "user123");
+				User user = new User();
 				user.setRole(Role.ROLE_USER);
 	            userService.register(user);
 	        }

@@ -1,6 +1,5 @@
 package com.fastcart.service.interf;
 
-import com.fastcart.dto.UserDto;
 import com.fastcart.model.User;
 
 public interface UserService {
@@ -10,7 +9,7 @@ public interface UserService {
 	 * @param user Los datos del usuario a crear
 	 * @return Obtiene el usuario registrado.
 	 */
-	public User register(UserDto user);
+	public String register(User user);
 	
 	/**
 	 * Verifica si ya existe un usuario en el sistema
