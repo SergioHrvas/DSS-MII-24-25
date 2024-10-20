@@ -120,6 +120,9 @@ public class CartServiceImpl implements CartService {
 				cartItemRepo.delete(item);
 				deleted = true;
 			} else {
+				if(num >= item.getNum()) {
+					num = item.getNum();
+				}
 				item.setNum(item.getNum() - num);
 			}
 		}
@@ -141,7 +144,7 @@ public class CartServiceImpl implements CartService {
 
 		try {
 
-	        PdfWriter pdfWriter = PdfWriter.getInstance(document, baos); //Error here        
+			PdfWriter pdfWriter = PdfWriter.getInstance(document, baos); // Error here
 
 			// Abrimos el documento
 			document.open();
@@ -179,8 +182,7 @@ public class CartServiceImpl implements CartService {
 			header3.setHorizontalAlignment(Element.ALIGN_CENTER);
 			header4.setBackgroundColor(BaseColor.DARK_GRAY);
 			header4.setHorizontalAlignment(Element.ALIGN_CENTER);
-			
-			
+
 			// Agregar encabezados a la tabla
 			table.addCell(header1);
 			table.addCell(header2);
@@ -189,20 +191,20 @@ public class CartServiceImpl implements CartService {
 
 			// Añadimos los productos del carrito
 			for (CartItem item : cart.getItems()) {
-				
-				PdfPCell productCell = new PdfPCell(new Phrase(item.getProduct().getNombre(), normalFont));
+
+				PdfPCell productCell = new PdfPCell(new Phrase(item.getProduct().getName(), normalFont));
 				PdfPCell quantityCell = new PdfPCell(new Phrase(String.valueOf(item.getNum()), normalFont));
 				PdfPCell priceCell = new PdfPCell(
-						new Phrase(String.format("%.2f €", item.getProduct().getPrecio()), normalFont));
+						new Phrase(String.format("%.2f €", item.getProduct().getPrice()), normalFont));
 				PdfPCell priceTotalCell = new PdfPCell(
-						new Phrase(String.format("%.2f €", item.getProduct().getPrecio()*item.getNum()), normalFont));
+						new Phrase(String.format("%.2f €", item.getProduct().getPrice() * item.getNum()), normalFont));
 
 				// Alineación de contenido
 				productCell.setHorizontalAlignment(Element.ALIGN_LEFT);
 				quantityCell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				priceCell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				priceTotalCell.setHorizontalAlignment(Element.ALIGN_RIGHT);
-				
+
 				table.addCell(productCell);
 				table.addCell(quantityCell);
 				table.addCell(priceCell);
@@ -214,14 +216,14 @@ public class CartServiceImpl implements CartService {
 
 			// Precio total del carrito
 			double totalPrice = cart.getItems().stream()
-					.mapToDouble(item -> item.getProduct().getPrecio() * item.getNum()).sum();
+					.mapToDouble(item -> item.getProduct().getPrice() * item.getNum()).sum();
 			document.add(new Paragraph("Total: " + String.format("%.2f", totalPrice) + " €", titleFont));
 
 			// Cerrar el documento
 			document.close();
-			
+
 			// Cerrar el PdfWriter
-	        pdfWriter.close(); 
+			pdfWriter.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new byte[0];

@@ -6,15 +6,15 @@ import lombok.Data;
 
 @Data
 public class CartItemDto {
-    private Long productId;
-    private String productName;
-    private double productPrice;
-    private int productNum;
+	private Long productId;
+    private String name;
+    private double price;
+    private int num;
 
     public CartItemDto(Product product, int productNum) {
-        this.productId = product.getId();
-        this.productName = product.getNombre(); // Ajusta según los campos de tu Product
-        this.productPrice = product.getPrecio(); // Ajusta según los campos de tu Product
-        this.productNum = productNum;
+    	this.productId = product.getId();
+        this.name = product.getName(); // Ajusta según los campos de tu Product
+        this.price = product.getPrice(); // Ajusta según los campos de tu Product
+        this.num = productNum;
     }
 }

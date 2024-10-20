@@ -21,14 +21,18 @@ public class Application11Application {
 		return (args) -> {
 			if (!userService.doesThisUserExist("admin")) {
 				User admin = new User();
-	            admin.setRole(Role.ROLE_ADMIN);
-	            userService.register(admin);
-	        }
+				admin.setRole(Role.ROLE_ADMIN);
+				admin.setUsername("admin");
+				admin.setPassword("admin123");
+				userService.register(admin);
+			}
 			if (!userService.doesThisUserExist("user")) {
 				User user = new User();
 				user.setRole(Role.ROLE_USER);
-	            userService.register(user);
-	        }
+				user.setUsername("user");
+				user.setPassword("user123");
+				userService.register(user);
+			}
 		};
 	}
 

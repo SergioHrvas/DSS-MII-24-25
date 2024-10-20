@@ -3,7 +3,6 @@ package com.fastcart.service.interf;
 import java.util.List;
 import java.util.Optional;
 
-import com.fastcart.dto.ProductDto;
 import com.fastcart.model.Product;
 
 public interface ProductService {
@@ -39,7 +38,7 @@ public interface ProductService {
 	 *                guardar.
 	 * @return El objeto `Product` guardado.
 	 */
-	public Product saveProduct(ProductDto product);
+	public Product saveProduct(Product product);
 
 	/**
 	 * Edita un producto existente.
@@ -48,7 +47,7 @@ public interface ProductService {
 	 *                producto.
 	 * @return El objeto `Product` editado.
 	 */
-	public Product editProduct(ProductDto product);
+	public Product editProduct(Product product);
 
 	/**
 	 * Elimina un producto por su ID.

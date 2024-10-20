@@ -3,17 +3,18 @@ package com.fastcart.controller;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.fastcart.dto.CartItemDto;
 import com.fastcart.service.interf.CartService;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import org.springframework.http.HttpHeaders;
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/cart")
+@Controller
+@RequestMapping("/cart")
 public class CartController {
 	private final CartService cartService;
 
@@ -22,20 +23,38 @@ public class CartController {
 	}
 
 	@GetMapping
-	List<CartItemDto> all(Authentication authentication) {
-		return cartService.getProductsCart(authentication.getName());
+	public String all(Model model, Authentication authentication) {
+		List<CartItemDto> items = cartService.getProductsCart(authentication.getName());
+
+		double total = 0;
+		for (CartItemDto item : items) {
+			total += item.getPrice() * item.getNum();
+		}
+
+		model.addAttribute("items", items);
+		model.addAttribute("total", total);
+
+		return "cart";
 	}
 
-	@PostMapping
-	public void addCartItem(@RequestBody ObjectNode json, Authentication authentication) {
-		Long idProduct = json.get("idProduct").asLong();
-		int num = json.get("num").asInt();
-		cartService.addItemCart(authentication.getName(), idProduct, num);
+	@PostMapping("/add_item")
+	public String addCartItem(@RequestParam(required = true, defaultValue = "1") int num,
+			@RequestParam(required = true) Long productId, Authentication authentication, Model model) {
+		boolean added = cartService.addItemCart(authentication.getName(), productId, num);
+
+		model.addAttribute("added", added);
+
+		return "redirect:/products";
+
 	}
 
-	@DeleteMapping
-	public boolean deleteCartItem(@RequestParam Long idProduct, @RequestParam int num, Authentication authentication) {
-		return cartService.updateOrDeleteProductCart(authentication.getName(), idProduct, num);
+	@PostMapping("/delete_item/{id}")
+	public String deleteCartItem(@PathVariable Long id, @RequestParam int num, Authentication authentication,
+			Model model) {
+		boolean deleted = cartService.updateOrDeleteProductCart(authentication.getName(), id, num);
+
+		model.addAttribute("deleted", deleted);
+		return "redirect:/cart";
 	}
 
 	@GetMapping("/pdf")

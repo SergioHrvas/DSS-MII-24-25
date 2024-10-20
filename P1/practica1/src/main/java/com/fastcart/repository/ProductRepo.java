@@ -9,5 +9,5 @@ import com.fastcart.model.Product;
 
 //@RepositoryRestResource(collectionResourceRel="tasks",path="tasks")
 public interface ProductRepo extends JpaRepository<Product, Long> {
-	List<Product> findByNombreContainingIgnoreCaseAndPrecioBetween(String nombre, Double minPrecio, Double maxPrecio);
+	List<Product> findByNameContainingIgnoreCaseAndPriceBetween(String name, Double minPrice, Double maxPrice);
 }

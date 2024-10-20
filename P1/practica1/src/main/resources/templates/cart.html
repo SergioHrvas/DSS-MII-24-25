@@ -23,10 +23,10 @@
 						<a class="nav-link" href="/">Inicio</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="productos">Lista de productos</a>
+						<a class="nav-link" href="products">Lista de productos</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link active" aria-current="page"  href="my-cart">Mi carro</a>
+						<a class="nav-link active" aria-current="page" href="cart">Mi carro</a>
 					</li>
 					<li class="nav-item" sec:authorize="isAuthenticated()">
 						<a class="nav-link" href="logout">Cerrar sesión</a>
@@ -49,7 +49,6 @@
 			<table id="items-table" class="table table-bordered table-hover">
 				<thead class="table-primary">
 					<tr>
-						<th>ID Producto</th>
 						<th>Nombre</th>
 						<th>Precio</th>
 						<th>Cantidad</th>
@@ -57,15 +56,37 @@
 						<th>Acciones</th>
 					</tr>
 				</thead>
-				<tbody id="cartItems">
-					<!-- Aquí se añadirán los elementos dinámicamente desde JavaScript -->
+				<tbody>
+					<tr th:each="item : ${items}">
+						<td th:text="${item.name}"></td>
+						<td th:text="${item.price} + '€'"></td>
+						<td th:text="${item.num}"></td>
+						<td th:text="${item.num * item.price} + '€'"></td>
+						<td>
+							<div class="input-group">
+								<!-- No es posible DELETE en HTML -->
+								<form th:action="@{/cart/delete_item/{id}(id=${item.productId})}" method="post"
+									style="display:inline;">
+									<div class="row align-items-center mb-3">
+										<div class="col-md-3">
+											<button type="submit" class="btn btn-danger">Eliminar</button>
+										</div>
+										<div class="col-md-7 ms-3">
+											<input type="number" th:value="1" th:name="num" min="1"
+												class="form-control ms-2" th:max="${item.num}" style="max-width: 100px;">
+										</div>
+									</div>
+								</form>
+							</div>
+						</td>
+					</tr>
 				</tbody>
 			</table>
 		</div>
 
 		<div class="text-end">
-			<h4>Total del Carro: <span id="cartTotal">$0.00</span></h4>
-			<a class="btn btn-success" href="/api/cart/pdf">Proceder al Pago</a>
+			<h4>Total del Carro: <span id="cartTotal" th:text="${total} + '€'">0.00 €</span></h4>
+			<a class="btn btn-success" th:href="@{/cart/pdf}">Proceder al Pago</a>
 		</div>
 
 		<div class="mt-4 mb-4">
@@ -73,7 +94,6 @@
 		</div>
 	</div>
 
-	<script th:src="@{/js/cart.js}"></script>
 </body>
 <footer class="bg-body-tertiary text-center text-lg-start">
 	<!-- Copyright -->

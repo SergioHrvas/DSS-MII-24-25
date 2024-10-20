@@ -2,7 +2,6 @@ package com.fastcart.service.impl;
 
 import org.springframework.stereotype.Service;
 
-import com.fastcart.dto.ProductDto;
 import com.fastcart.model.Product;
 import com.fastcart.repository.CartItemRepo;
 import com.fastcart.repository.ProductRepo;
@@ -37,22 +36,23 @@ public class ProductServiceImpl implements ProductService {
 		return productRepo.existsById(id);
 	}
 
-	public Product saveProduct(ProductDto product) {
-		Product new_product = new Product();
+	public Product saveProduct(Product product) {
 
-		new_product.setNombre(product.getNombre());
-		new_product.setPrecio(product.getPrecio());
+		product.setName(product.getName());
+		product.setPrice(product.getPrice());
 
-		return productRepo.save(new_product);
+		return productRepo.save(product);
 	}
 
-	public Product editProduct(ProductDto product) {
-		Product edited_product = productRepo.getReferenceById(product.getId());
+	public Product editProduct(Product product) {
+		// Obtener el producto existente por ID
+		Product existingProduct = productRepo.findById(product.getId())
+				.orElseThrow(() -> new IllegalArgumentException("Producto no encontrado: " + product.getId()));
 
-		edited_product.setNombre(product.getNombre());
-		edited_product.setPrecio(product.getPrecio());
+		existingProduct.setName(product.getName());
+		existingProduct.setPrice(product.getPrice());
 
-		return productRepo.save(edited_product);
+		return productRepo.save(existingProduct);
 	}
 
 	public boolean deleteProduct(Long id) {
@@ -68,21 +68,19 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	public List<Product> searchAndFilterProducts(String name, Double minPrice, Double maxPrice) {
-		return productRepo.findByNombreContainingIgnoreCaseAndPrecioBetween(name, minPrice, maxPrice);
+		return productRepo.findByNameContainingIgnoreCaseAndPriceBetween(name, minPrice, maxPrice);
 	}
 
 	public byte[] exportProducts() {
 		// Creamos el script
 		StringBuilder sqlScript = new StringBuilder();
-		
-		//Creamos la tabla
-		sqlScript.append("CREATE TABLE IF NOT EXISTS products (\n")
-		          .append("    id BIGINT PRIMARY KEY,\n")
-		          .append("    name VARCHAR(255) NOT NULL,\n")
-		          .append("    price DECIMAL(10, 2) NOT NULL\n")
-		          .append(");\n");
-		
-		//Primera linea del INSERT
+
+		// Creamos la tabla
+		sqlScript.append("CREATE TABLE IF NOT EXISTS products (\n").append("    id BIGINT PRIMARY KEY,\n")
+				.append("    name VARCHAR(255) NOT NULL,\n").append("    price DECIMAL(10, 2) NOT NULL\n")
+				.append(");\n");
+
+		// Primera linea del INSERT
 		sqlScript.append("INSERT INTO products (id, name, price) VALUES\n");
 
 		List<Product> products = productRepo.findAll(); // Obtener todos los productos
@@ -91,10 +89,10 @@ public class ProductServiceImpl implements ProductService {
 		for (int i = 0; i < products.size(); i++) {
 			Product product = products.get(i);
 			sqlScript.append(String.format("(%d, '%s', %s)", product.getId(),
-					product.getNombre() != null ? product.getNombre().replace("'", "''") : product.getNombre(), // Escapar
-																												// comillas
-																												// simples
-					Double.toString(product.getPrecio()).replace(",", "."))); // Escapar comillas simples
+					product.getName() != null ? product.getName().replace("'", "''") : product.getName(), // Escapar
+																											// comillas
+																											// simples
+					Double.toString(product.getPrice()).replace(",", "."))); // Escapar comillas simples
 
 			if (i < products.size() - 1) {
 				sqlScript.append(",\n"); // Agregar coma después de cada línea, excepto la última
