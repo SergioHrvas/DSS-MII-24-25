@@ -6,6 +6,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fastcart.dto.CartItemDto;
 import com.fastcart.service.interf.CartService;
@@ -39,10 +40,10 @@ public class CartController {
 
 	@PostMapping("/add_item")
 	public String addCartItem(@RequestParam(required = true, defaultValue = "1") int num,
-			@RequestParam(required = true) Long productId, Authentication authentication, Model model) {
+			@RequestParam(required = true) Long productId, Authentication authentication,  RedirectAttributes redirectAttributes) {
 		boolean added = cartService.addItemCart(authentication.getName(), productId, num);
 
-		model.addAttribute("added", added);
+		redirectAttributes.addFlashAttribute("added", added);
 
 		return "redirect:/products";
 
