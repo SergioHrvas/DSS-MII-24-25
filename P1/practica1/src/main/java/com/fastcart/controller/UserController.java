@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fastcart.model.Role;
 import com.fastcart.model.User;
@@ -24,7 +25,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/user/register")
-	public String register(@ModelAttribute("user") User user, Model model) {
+	public String register(@ModelAttribute("user") User user, Model model,  RedirectAttributes redirectAttributes) {
 		user.setRole(Role.ROLE_USER);
 		String error = userService.register(user);
 		
@@ -33,6 +34,9 @@ public class UserController {
 	        model.addAttribute("error", error); // Agregar el mensaje de error al modelo
 	        return "register"; // Regresar al formulario de registro
 	    }
+	    
+		redirectAttributes.addFlashAttribute("registered", true);
+
 	    
         return "redirect:/login"; // redirigir a una página de éxito
 

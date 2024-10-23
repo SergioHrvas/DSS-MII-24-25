@@ -32,6 +32,8 @@
 	</nav>
 	<div class="container login-container mb-4">
 		<div class="login-box">
+			<p class="alert alert-success" th:if="${registered != null and registered}">Te has registrado correctamente. Por favor, inicia sesión.</p>
+
 			<h2 class="login-title">Iniciar Sesión</h2>
 			<form th:action="@{/login}" method="post">
 				<div class="form-group">
