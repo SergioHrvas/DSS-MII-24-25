@@ -11,8 +11,6 @@
            xmlns:orawsp="http://schemas.oracle.com/ws/2006/01/policy"
            xmlns:ui="http://xmlns.oracle.com/soa/designer/"
            xmlns:sca-ext="http://xmlns.oracle.com/sca/1.0-ext">
-  <import namespace="http://xmlns.oracle.com/FlightServicesApp/FlightServicesProject/BPELProcess1"
-          location="WSDLs/BPELProcess1.wsdl" importType="wsdl"/>
   <import namespace="http://xmlns.oracle.com/FlightServicesApp/FlightServicesProject/EmpleadoProcess"
           location="WSDLs/EmpleadoProcess.wsdl" importType="wsdl"/>
   <import namespace="http://xmlns.oracle.com/FlightServicesApp/FlightServicesProject/ProcesoEmpleado"
@@ -21,10 +19,6 @@
           location="WSDLs/ProcesoIberia.wsdl" importType="wsdl"/>
   <import namespace="http://xmlns.oracle.com/Application1/FlightServicesProject/ProcesoVueling"
           location="WSDLs/ProcesoVueling.wsdl" importType="wsdl"/>
-  <service name="bpelprocess1_client_ep" ui:wsdlLocation="WSDLs/BPELProcess1.wsdl">
-    <interface.wsdl interface="http://xmlns.oracle.com/FlightServicesApp/FlightServicesProject/BPELProcess1#wsdl.interface(BPELProcess1)"/>
-    <binding.ws port="http://xmlns.oracle.com/FlightServicesApp/FlightServicesProject/BPELProcess1#wsdl.endpoint(bpelprocess1_client_ep/BPELProcess1_pt)"/>
-  </service>
   <service name="procesoempleado_client_ep" ui:wsdlLocation="WSDLs/ProcesoEmpleado.wsdl">
     <interface.wsdl interface="http://xmlns.oracle.com/FlightServicesApp/FlightServicesProject/ProcesoEmpleado#wsdl.interface(ProcesoEmpleado)"
                     callbackInterface="http://xmlns.oracle.com/FlightServicesApp/FlightServicesProject/ProcesoEmpleado#wsdl.interface(ProcesoEmpleadoCallback)"/>
@@ -43,15 +37,6 @@
   </service>
   <property name="productVersion" type="xs:string" many="false">12.2.1.4.0.190828</property>
   <property name="compositeID" type="xs:string" many="false">2124d7c9-fdd1-48c5-807a-863743b497a0</property>
-  <component name="BPELProcess1" version="2.0">
-    <implementation.bpel src="BPEL/BPELProcess1.bpel"/>
-    <componentType>
-      <service name="bpelprocess1_client" ui:wsdlLocation="WSDLs/BPELProcess1.wsdl">
-        <interface.wsdl interface="http://xmlns.oracle.com/FlightServicesApp/FlightServicesProject/BPELProcess1#wsdl.interface(BPELProcess1)"/>
-      </service>
-    </componentType>
-    <property name="bpel.config.transaction" type="xs:string" many="false">required</property>
-  </component>
   <component name="EmpleadoProcess" version="2.0">
     <implementation.bpel src="BPEL/EmpleadoProcess.bpel"/>
     <componentType>
@@ -89,10 +74,6 @@
     </componentType>
     <property name="bpel.config.transaction" type="xs:string" many="false">required</property>
   </component>
-  <wire>
-    <source.uri>bpelprocess1_client_ep</source.uri>
-    <target.uri>BPELProcess1/bpelprocess1_client</target.uri>
-  </wire>
   <wire>
     <source.uri>procesoempleado_client_ep</source.uri>
     <target.uri>ProcesoEmpleado/procesoempleado_client</target.uri>

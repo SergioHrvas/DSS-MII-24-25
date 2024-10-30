@@ -1,31 +1,28 @@
 SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
 SLF4J: Defaulting to no-operation (NOP) logger implementation
 SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
-2024-10-30 20:23:08.458/1.334 Oracle Coherence 12.2.1.4.0 <Info> (thread=main, member=n/a): Loaded operational configuration from "jar:file:/C:/Oracle/Middleware/Oracle_Home2/coherence/lib/coherence.jar!/tangosol-coherence.xml"
-2024-10-30 20:23:08.483/1.358 Oracle Coherence 12.2.1.4.0 <Info> (thread=main, member=n/a): Loaded operational overrides from "jar:file:/C:/Oracle/Middleware/Oracle_Home2/coherence/lib/coherence.jar!/tangosol-coherence-override-dev.xml"
-2024-10-30 20:23:08.484/1.359 Oracle Coherence 12.2.1.4.0 <Info> (thread=main, member=n/a): Optional configuration override "/tangosol-coherence-override.xml" is not specified
-2024-10-30 20:23:08.486/1.361 Oracle Coherence 12.2.1.4.0 <Info> (thread=main, member=n/a): Optional configuration override "cache-factory-config.xml" is not specified
-2024-10-30 20:23:08.487/1.362 Oracle Coherence 12.2.1.4.0 <Info> (thread=main, member=n/a): Optional configuration override "cache-factory-builder-config.xml" is not specified
-2024-10-30 20:23:08.488/1.363 Oracle Coherence 12.2.1.4.0 <Info> (thread=main, member=n/a): Optional configuration override "/custom-mbeans.xml" is not specified
+2024-10-30 21:51:12.202/2.264 Oracle Coherence 12.2.1.4.0 <Info> (thread=main, member=n/a): Loaded operational configuration from "jar:file:/C:/Oracle/Middleware/Oracle_Home/coherence/lib/coherence.jar!/tangosol-coherence.xml"
+2024-10-30 21:51:12.253/2.314 Oracle Coherence 12.2.1.4.0 <Info> (thread=main, member=n/a): Loaded operational overrides from "jar:file:/C:/Oracle/Middleware/Oracle_Home/coherence/lib/coherence.jar!/tangosol-coherence-override-dev.xml"
+2024-10-30 21:51:12.255/2.316 Oracle Coherence 12.2.1.4.0 <Info> (thread=main, member=n/a): Optional configuration override "/tangosol-coherence-override.xml" is not specified
+2024-10-30 21:51:12.258/2.320 Oracle Coherence 12.2.1.4.0 <Info> (thread=main, member=n/a): Optional configuration override "cache-factory-config.xml" is not specified
+2024-10-30 21:51:12.260/2.321 Oracle Coherence 12.2.1.4.0 <Info> (thread=main, member=n/a): Optional configuration override "cache-factory-builder-config.xml" is not specified
+2024-10-30 21:51:12.262/2.324 Oracle Coherence 12.2.1.4.0 <Info> (thread=main, member=n/a): Optional configuration override "/custom-mbeans.xml" is not specified
 
 Oracle Coherence Version 12.2.1.4.0 Build 74888
  Grid Edition: Development mode
 Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.
 
-2024-10-30 20:23:09.057/1.932 Oracle Coherence GE 12.2.1.4.0 <Info> (thread=main, member=n/a): The cluster name has not been configured, a value of "sergi's cluster" has been automatically generated
-2024-10-30 20:23:09.406/2.282 Oracle Coherence GE 12.2.1.4.0 <Info> (thread=main, member=n/a): Created cache factory com.tangosol.net.ExtensibleConfigurableCacheFactory
-ADVERTENCIA: Failed to load WSDL from WSDLs/EmpleadoProcess.wsdl due to: Error al obtener el flujo de entrada XML: file:/C:/JDeveloper/mywork/FlightServicesProject/SOA/WSDLs/EmpleadoProcess.wsdl: C:\JDeveloper\mywork\FlightServicesProject\SOA\WSDLs\EmpleadoProcess.wsdl (El sistema no puede encontrar el archivo especificado)Will retry to load
+2024-10-30 21:51:12.835/2.896 Oracle Coherence GE 12.2.1.4.0 <Info> (thread=main, member=n/a): The cluster name has not been configured, a value of "sergi's cluster" has been automatically generated
+2024-10-30 21:51:13.017/3.078 Oracle Coherence GE 12.2.1.4.0 <Info> (thread=main, member=n/a): Created cache factory com.tangosol.net.ExtensibleConfigurableCacheFactory
+ADVERTENCIA: Failed to load WSDL from WSDLs/EmpleadoProcess.wsdl due to: Error al obtener el flujo de entrada XML: file:/C:/Users/sergi/Documents/PRACTICAS%20DSS/DSS-MII-24-25/P2/FlightServicesProject/SOA/WSDLs/EmpleadoProcess.wsdl: C:\Users\sergi\Documents\PRACTICAS DSS\DSS-MII-24-25\P2\FlightServicesProject\SOA\WSDLs\EmpleadoProcess.wsdl (El sistema no puede encontrar el archivo especificado)Will retry to load
 GRAVE:  failed to parse wsdl from WSDLs/EmpleadoProcess.wsdl : 
 
 ADVERTENCIA: Validating WSDLs from WSDLManager....  with option UseSoaInfraMds:false
 INFORMACIÓN: XMLSchema incremental build enabled.
-ADVERTENCIA: Failed to load WSDL from WSDLs/EmpleadoProcess.wsdl due to: Error al obtener el flujo de entrada XML: file:/C:/JDeveloper/mywork/FlightServicesProject/SOA/WSDLs/EmpleadoProcess.wsdl: C:\JDeveloper\mywork\FlightServicesProject\SOA\WSDLs\EmpleadoProcess.wsdl (El sistema no puede encontrar el archivo especificado)Will retry to load
+ADVERTENCIA: Failed to load WSDL from WSDLs/EmpleadoProcess.wsdl due to: Error al obtener el flujo de entrada XML: file:/C:/Users/sergi/Documents/PRACTICAS%20DSS/DSS-MII-24-25/P2/FlightServicesProject/SOA/WSDLs/EmpleadoProcess.wsdl: C:\Users\sergi\Documents\PRACTICAS DSS\DSS-MII-24-25\P2\FlightServicesProject\SOA\WSDLs\EmpleadoProcess.wsdl (El sistema no puede encontrar el archivo especificado)Will retry to load
 GRAVE:  failed to parse wsdl from WSDLs/EmpleadoProcess.wsdl : 
 
-ADVERTENCIA: Failed to load WSDL from WSDLs/EmpleadoProcess.wsdl due to: Error al obtener el flujo de entrada XML: file:/C:/JDeveloper/mywork/FlightServicesProject/SOA/WSDLs/EmpleadoProcess.wsdl: C:\JDeveloper\mywork\FlightServicesProject\SOA\WSDLs\EmpleadoProcess.wsdl (El sistema no puede encontrar el archivo especificado)Will retry to load
-GRAVE:  failed to parse wsdl from WSDLs/EmpleadoProcess.wsdl : 
-
-ADVERTENCIA: Failed to load WSDL from WSDLs/EmpleadoProcess.wsdl due to: Error al obtener el flujo de entrada XML: file:/C:/JDeveloper/mywork/FlightServicesProject/SOA/WSDLs/EmpleadoProcess.wsdl: C:\JDeveloper\mywork\FlightServicesProject\SOA\WSDLs\EmpleadoProcess.wsdl (El sistema no puede encontrar el archivo especificado)Will retry to load
+ADVERTENCIA: Failed to load WSDL from WSDLs/EmpleadoProcess.wsdl due to: Error al obtener el flujo de entrada XML: file:/C:/Users/sergi/Documents/PRACTICAS%20DSS/DSS-MII-24-25/P2/FlightServicesProject/SOA/WSDLs/EmpleadoProcess.wsdl: C:\Users\sergi\Documents\PRACTICAS DSS\DSS-MII-24-25\P2\FlightServicesProject\SOA\WSDLs\EmpleadoProcess.wsdl (El sistema no puede encontrar el archivo especificado)Will retry to load
 GRAVE:  failed to parse wsdl from WSDLs/EmpleadoProcess.wsdl : 
 
 Java HotSpot(TM) 64-Bit Server VM warning: ignoring option PermSize=32m; support was removed in 8.0

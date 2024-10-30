@@ -16,7 +16,17 @@
                xmlns:ora="http://schemas.oracle.com/xpath/extension"
                xmlns:ui="http://xmlns.oracle.com/soa/designer"
                xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
-         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap">
 
     <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/Application1/FlightServicesProject/ProcesoVueling" location="../WSDLs/ProcesoVueling.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
     <!-- 
@@ -57,8 +67,59 @@
   -->
   <sequence name="main">
 
-    <!-- Receive input from requestor. (Note: This maps to operation defined in ProcesoVueling.wsdl) -->
-    <receive name="receiveInput" partnerLink="procesovueling_client" portType="client:ProcesoVueling" operation="process" variable="inputVariable" createInstance="yes"/>
+    <!-- Receive input from requestor. (Note: This maps to operation defined in ProcesoVueling.wsdl) --><sequence name="main"
+                                                                                                                  xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      <!-- Receive input from requestor. (Note: This maps to operation defined in ProcesoIberia.wsdl) -->
+      <receive name="receiveInput" partnerLink="procesoiberia_client" portType="client:ProcesoIberia"
+               operation="process" variable="inputVariable" createInstance="yes"/>
+      <if name="condicionFechas">
+         <documentation>
+          <![CDATA[siFechasBien]]>
+        </documentation><condition>$inputVariable.payload/client:fechaInicio &lt; $inputVariable.payload/client:fechaFin</condition>
+         <if name="condicionTipoBillete">
+            <documentation>
+            <![CDATA[siTourist]]>
+          </documentation><condition>$inputVariable.payload/client:tipoBillete = "tourist"</condition>
+            <assign name="AssignPriceTourist">
+               
+            <copy>
+                  <from>10 * 10</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:precio</to>
+               </copy></assign>
+            <elseif>
+               <documentation>
+              <![CDATA[siBusiness]]>
+            </documentation><condition>$inputVariable.payload/client:tipoBillete = "business"</condition>
+               <assign name="AssignPriceBusiness">
+                  
+               <copy>
+                     <from>10 * 25</from>
+                     <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:precio</to>
+                  </copy></assign>
+            </elseif>
+            <elseif>
+            <documentation>
+              <![CDATA[siPrivatejet]]>
+            </documentation>
+            <condition>$inputVariable.payload/client:tipoBillete = "privatejet"</condition><assign name="AssignPricePrivatejet"
+                                                                                                   xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+                  
+               <copy>
+                     <from>10*100</from>
+                     <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:precio</to>
+                  </copy></assign></elseif><else>
+               
+            <throw name="Error" faultName="bpel:invalidExpressionValue"
+                   xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"/></else>
+         </if>
+         <else>
+            <throw name="Error" faultName="bpelx:bindingFault"/>
+         </else>
+      </if>
+      <!-- Generate reply to synchronous request -->
+      <reply name="replyOutput" partnerLink="procesoiberia_client" portType="client:ProcesoIberia" operation="process"
+             variable="outputVariable"/>
+   </sequence><receive name="receiveInput" partnerLink="procesovueling_client" portType="client:ProcesoVueling" operation="process" variable="inputVariable" createInstance="yes"/>
 
     <!-- Generate reply to synchronous request -->
     <reply name="replyOutput" partnerLink="procesovueling_client" portType="client:ProcesoVueling" operation="process" variable="outputVariable"/>

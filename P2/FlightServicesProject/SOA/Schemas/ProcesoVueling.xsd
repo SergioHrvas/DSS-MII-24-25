@@ -6,15 +6,18 @@
 	<element name="process">
 		<complexType>
 			<sequence>
-				<element name="input" type="string"/>
-			</sequence>
+    <element name="tipoAeropuerto" type="string"/>
+    <element name="tipoBillete" type="string"/>
+    <element name="fechaInicio" type="date"/>
+    <element name="fechaFin" type="date"/>
+   </sequence>
 		</complexType>
 	</element>
 	<element name="processResponse">
 		<complexType>
 			<sequence>
-				<element name="result" type="string"/>
-			</sequence>
+    <element name="precio" type="string"/>
+   </sequence>
 		</complexType>
 	</element>
 </schema>
