@@ -3,22 +3,22 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   Oracle JDeveloper BPEL Designer 
   
-  Created: Wed Oct 30 15:37:23 CET 2024
+  Created: Wed Oct 30 20:22:27 CET 2024
   Author:  sergi
   Type: BPEL 2.0 Process
   Purpose: Synchronous BPEL Process
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 -->
-<process name="ProcesoIberia"
-               targetNamespace="http://xmlns.oracle.com/FlightServicesApp/FlightServicesProject/ProcesoIberia"
+<process name="ProcesoVueling"
+               targetNamespace="http://xmlns.oracle.com/Application1/FlightServicesProject/ProcesoVueling"
                xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
-               xmlns:client="http://xmlns.oracle.com/FlightServicesApp/FlightServicesProject/ProcesoIberia"
+               xmlns:client="http://xmlns.oracle.com/Application1/FlightServicesProject/ProcesoVueling"
                xmlns:ora="http://schemas.oracle.com/xpath/extension"
                xmlns:ui="http://xmlns.oracle.com/soa/designer"
                xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
-         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable" xmlns:ns1="urn:Iberia">
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
 
-    <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/FlightServicesApp/FlightServicesProject/ProcesoIberia" location="../WSDLs/ProcesoIberia.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/Application1/FlightServicesProject/ProcesoVueling" location="../WSDLs/ProcesoVueling.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
     <!-- 
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         PARTNERLINKS                                                      
@@ -31,7 +31,7 @@
       used for callback. The location and correlation information associated
       with the client role are automatically set using WS-Addressing.
     -->
-    <partnerLink name="procesoiberia_client" partnerLinkType="client:ProcesoIberia" myRole="ProcesoIberiaProvider"/>
+    <partnerLink name="procesovueling_client" partnerLinkType="client:ProcesoVueling" myRole="ProcesoVuelingProvider"/>
   </partnerLinks>
 
   <!-- 
@@ -42,10 +42,10 @@
   -->
   <variables>
     <!-- Reference to the message passed as input during initiation -->
-    <variable name="inputVariable" messageType="client:ProcesoIberiaRequestMessage"/>
+    <variable name="inputVariable" messageType="client:ProcesoVuelingRequestMessage"/>
 
     <!-- Reference to the message that will be returned to the requester-->
-    <variable name="outputVariable" messageType="client:ProcesoIberiaResponseMessage"/>
+    <variable name="outputVariable" messageType="client:ProcesoVuelingResponseMessage"/>
   </variables>
 
   <!-- 
@@ -57,12 +57,10 @@
   -->
   <sequence name="main">
 
-    <!-- Receive input from requestor. (Note: This maps to operation defined in ProcesoIberia.wsdl) -->
-    <receive name="receiveInput" partnerLink="procesoiberia_client" portType="client:ProcesoIberia" operation="process" variable="inputVariable" createInstance="yes"/>
-    <if name="If1">
-      <else></else>
-    </if>
+    <!-- Receive input from requestor. (Note: This maps to operation defined in ProcesoVueling.wsdl) -->
+    <receive name="receiveInput" partnerLink="procesovueling_client" portType="client:ProcesoVueling" operation="process" variable="inputVariable" createInstance="yes"/>
+
     <!-- Generate reply to synchronous request -->
-    <reply name="replyOutput" partnerLink="procesoiberia_client" portType="client:ProcesoIberia" operation="process" variable="outputVariable"/>
+    <reply name="replyOutput" partnerLink="procesovueling_client" portType="client:ProcesoVueling" operation="process" variable="outputVariable"/>
   </sequence>
 </process>

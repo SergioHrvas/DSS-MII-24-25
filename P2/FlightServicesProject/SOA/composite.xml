@@ -19,6 +19,8 @@
           location="WSDLs/ProcesoEmpleado.wsdl" importType="wsdl"/>
   <import namespace="http://xmlns.oracle.com/FlightServicesApp/FlightServicesProject/ProcesoIberia"
           location="WSDLs/ProcesoIberia.wsdl" importType="wsdl"/>
+  <import namespace="http://xmlns.oracle.com/Application1/FlightServicesProject/ProcesoVueling"
+          location="WSDLs/ProcesoVueling.wsdl" importType="wsdl"/>
   <service name="bpelprocess1_client_ep" ui:wsdlLocation="WSDLs/BPELProcess1.wsdl">
     <interface.wsdl interface="http://xmlns.oracle.com/FlightServicesApp/FlightServicesProject/BPELProcess1#wsdl.interface(BPELProcess1)"/>
     <binding.ws port="http://xmlns.oracle.com/FlightServicesApp/FlightServicesProject/BPELProcess1#wsdl.endpoint(bpelprocess1_client_ep/BPELProcess1_pt)"/>
@@ -34,6 +36,10 @@
   <service name="procesoiberia_client_ep" ui:wsdlLocation="WSDLs/ProcesoIberia.wsdl">
     <interface.wsdl interface="http://xmlns.oracle.com/FlightServicesApp/FlightServicesProject/ProcesoIberia#wsdl.interface(ProcesoIberia)"/>
     <binding.ws port="http://xmlns.oracle.com/FlightServicesApp/FlightServicesProject/ProcesoIberia#wsdl.endpoint(procesoiberia_client_ep/ProcesoIberia_pt)"/>
+  </service>
+  <service name="procesovueling_client_ep" ui:wsdlLocation="WSDLs/ProcesoVueling.wsdl">
+    <interface.wsdl interface="http://xmlns.oracle.com/Application1/FlightServicesProject/ProcesoVueling#wsdl.interface(ProcesoVueling)"/>
+    <binding.ws port="http://xmlns.oracle.com/Application1/FlightServicesProject/ProcesoVueling#wsdl.endpoint(procesovueling_client_ep/ProcesoVueling_pt)"/>
   </service>
   <property name="productVersion" type="xs:string" many="false">12.2.1.4.0.190828</property>
   <property name="compositeID" type="xs:string" many="false">2124d7c9-fdd1-48c5-807a-863743b497a0</property>
@@ -74,6 +80,15 @@
     </componentType>
     <property name="bpel.config.transaction" type="xs:string" many="false">required</property>
   </component>
+  <component name="ProcesoVueling" version="2.0">
+    <implementation.bpel src="BPEL/ProcesoVueling.bpel"/>
+    <componentType>
+      <service name="procesovueling_client" ui:wsdlLocation="WSDLs/ProcesoVueling.wsdl">
+        <interface.wsdl interface="http://xmlns.oracle.com/Application1/FlightServicesProject/ProcesoVueling#wsdl.interface(ProcesoVueling)"/>
+      </service>
+    </componentType>
+    <property name="bpel.config.transaction" type="xs:string" many="false">required</property>
+  </component>
   <wire>
     <source.uri>bpelprocess1_client_ep</source.uri>
     <target.uri>BPELProcess1/bpelprocess1_client</target.uri>
@@ -85,5 +100,9 @@
   <wire>
     <source.uri>procesoiberia_client_ep</source.uri>
     <target.uri>ProcesoIberia/procesoiberia_client</target.uri>
+  </wire>
+  <wire>
+    <source.uri>procesovueling_client_ep</source.uri>
+    <target.uri>ProcesoVueling/procesovueling_client</target.uri>
   </wire>
 </composite>

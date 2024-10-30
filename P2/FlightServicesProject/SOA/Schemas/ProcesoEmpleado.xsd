@@ -6,14 +6,14 @@
 	<element name="process">
 		<complexType>
 			<sequence>
-				<element name="input" type="string"/>
+				<element name="nombre" type="string"/>
 			</sequence>
 		</complexType>
 	</element>
 	<element name="processResponse">
 		<complexType>
 			<sequence>
-				<element name="result" type="string"/>
+				<element name="tipoBillete" type="string"/>
 			</sequence>
 		</complexType>
 	</element>

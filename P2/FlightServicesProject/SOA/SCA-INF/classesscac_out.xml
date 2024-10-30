@@ -5,18 +5,18 @@
       <loc>/ns:composite/ns:import[@location='WSDLs/EmpleadoProcess.wsdl']</loc>
       <line>17</line>
       <col>68</col>
-      <file>C:\JDeveloper\mywork\FlightServicesApp\FlightServicesProject\SOA\composite.xml</file>
-      <name>C:\JDeveloper\mywork\FlightServicesApp\FlightServicesProject\SOA\composite.xml</name>
+      <file>C:\JDeveloper\mywork\FlightServicesProject\SOA\composite.xml</file>
+      <name>C:\JDeveloper\mywork\FlightServicesProject\SOA\composite.xml</name>
       <fix/>
       <msg>Fallo al cargar WSDL "WSDLs/EmpleadoProcess.wsdl"</msg>
    </Fault>
    <Fault>
       <severity>error</severity>
       <loc>/ns:composite/ns:component[@name='EmpleadoProcess']</loc>
-      <line>49</line>
+      <line>55</line>
       <col>51</col>
-      <file>C:\JDeveloper\mywork\FlightServicesApp\FlightServicesProject\SOA\composite.xml</file>
-      <name>C:\JDeveloper\mywork\FlightServicesApp\FlightServicesProject\SOA\composite.xml</name>
+      <file>C:\JDeveloper\mywork\FlightServicesProject\SOA\composite.xml</file>
+      <name>C:\JDeveloper\mywork\FlightServicesProject\SOA\composite.xml</name>
       <fix/>
       <msg>No se ha encontrado del tipo de puerto "{http://xmlns.oracle.com/FlightServicesApp/FlightServicesProject/EmpleadoProcess}EmpleadoProcess" de "empleadoprocess_client" en Gestor de WSDL</msg>
    </Fault>
@@ -25,8 +25,8 @@
       <loc>/ns:composite/ns:component[@name='EmpleadoProcess/empleadoprocess_client']</loc>
       <line/>
       <col/>
-      <file>C:\JDeveloper\mywork\FlightServicesApp\FlightServicesProject\SOA\composite.xml</file>
-      <name>C:\JDeveloper\mywork\FlightServicesApp\FlightServicesProject\SOA\composite.xml</name>
+      <file>C:\JDeveloper\mywork\FlightServicesProject\SOA\composite.xml</file>
+      <name>C:\JDeveloper\mywork\FlightServicesProject\SOA\composite.xml</name>
       <fix/>
       <msg>El servicio "empleadoprocess_client" expuesto por el componente "EmpleadoProcess" no se ha transmitido o lo está utilizando otro componente.</msg>
    </Fault>
@@ -38,7 +38,7 @@
       <file>BPEL/ProcesoEmpleado.bpel</file>
       <name>BPEL/ProcesoEmpleado.bpel</name>
       <fix>Please check import location or element QNames.</fix>
-      <msg>Error al obtener el flujo de entrada XML: file:/C:/JDeveloper/mywork/FlightServicesApp/FlightServicesProject/SOA/WSDLs/EmpleadoProcess.wsdl: C:\JDeveloper\mywork\FlightServicesApp\FlightServicesProject\SOA\WSDLs\EmpleadoProcess.wsdl (El sistema no puede encontrar el archivo especificado)</msg>
+      <msg>Error al obtener el flujo de entrada XML: file:/C:/JDeveloper/mywork/FlightServicesProject/SOA/WSDLs/EmpleadoProcess.wsdl: C:\JDeveloper\mywork\FlightServicesProject\SOA\WSDLs\EmpleadoProcess.wsdl (El sistema no puede encontrar el archivo especificado)</msg>
    </Fault>
    <Fault>
       <severity>warning</severity>
@@ -67,8 +67,8 @@
       <col/>
       <file>BPEL/ProcesoEmpleado.bpel</file>
       <name>BPEL/ProcesoEmpleado.bpel</name>
-      <fix>Make sure that value "ns1:EmpleadoRequestMessage" is resolvable (check imports, value of "messageType").</fix>
-      <msg>"messageType" is set to "ns1:EmpleadoRequestMessage" on this &lt;bpel:variable>  but it cannot be resolved (check value of "messageType", imports, WSDLs or XSDs).</msg>
+      <fix>Make sure that value "client:ProcesoEmpleadoRequestMessage" is resolvable (check imports, value of "messageType").</fix>
+      <msg>"messageType" is set to "client:ProcesoEmpleadoRequestMessage" on this &lt;bpel:variable>  but it cannot be resolved (check value of "messageType", imports, WSDLs or XSDs).</msg>
    </Fault>
    <Fault>
       <severity>error</severity>
@@ -77,8 +77,8 @@
       <col/>
       <file>BPEL/ProcesoEmpleado.bpel</file>
       <name>BPEL/ProcesoEmpleado.bpel</name>
-      <fix>Make sure that value "ns1:EmpleadoResponseMessage" is resolvable (check imports, value of "messageType").</fix>
-      <msg>"messageType" is set to "ns1:EmpleadoResponseMessage" on this &lt;bpel:variable>  but it cannot be resolved (check value of "messageType", imports, WSDLs or XSDs).</msg>
+      <fix>Make sure that value "client:ProcesoEmpleadoResponseMessage" is resolvable (check imports, value of "messageType").</fix>
+      <msg>"messageType" is set to "client:ProcesoEmpleadoResponseMessage" on this &lt;bpel:variable>  but it cannot be resolved (check value of "messageType", imports, WSDLs or XSDs).</msg>
    </Fault>
    <Fault>
       <severity>warning</severity>
@@ -113,7 +113,7 @@
    <Fault>
       <severity>warning</severity>
       <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='invoke'][@name='callbackClient']</loc>
-      <line>91</line>
+      <line>92</line>
       <col/>
       <file>BPEL/ProcesoEmpleado.bpel</file>
       <name>BPEL/ProcesoEmpleado.bpel</name>
@@ -123,7 +123,7 @@
    <Fault>
       <severity>warning</severity>
       <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='invoke'][@name='callbackClient']</loc>
-      <line>91</line>
+      <line>92</line>
       <col/>
       <file>BPEL/ProcesoEmpleado.bpel</file>
       <name>BPEL/ProcesoEmpleado.bpel</name>
@@ -133,7 +133,7 @@
    <Fault>
       <severity>error</severity>
       <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='invoke'][@name='callbackClient']</loc>
-      <line>91</line>
+      <line>92</line>
       <col/>
       <file>BPEL/ProcesoEmpleado.bpel</file>
       <name>BPEL/ProcesoEmpleado.bpel</name>
@@ -148,7 +148,7 @@
       <file>BPEL/BPELProcess1.bpel</file>
       <name>BPEL/BPELProcess1.bpel</name>
       <fix>Please check import location or element QNames.</fix>
-      <msg>Error al obtener el flujo de entrada XML: file:/C:/JDeveloper/mywork/FlightServicesApp/FlightServicesProject/SOA/WSDLs/EmpleadoProcess.wsdl: C:\JDeveloper\mywork\FlightServicesApp\FlightServicesProject\SOA\WSDLs\EmpleadoProcess.wsdl (El sistema no puede encontrar el archivo especificado)</msg>
+      <msg>Error al obtener el flujo de entrada XML: file:/C:/JDeveloper/mywork/FlightServicesProject/SOA/WSDLs/EmpleadoProcess.wsdl: C:\JDeveloper\mywork\FlightServicesProject\SOA\WSDLs\EmpleadoProcess.wsdl (El sistema no puede encontrar el archivo especificado)</msg>
    </Fault>
    <Fault>
       <severity>warning</severity>
@@ -269,5 +269,115 @@
       <name>BPEL/ProcesoIberia.bpel</name>
       <fix/>
       <msg>Element not completed: 'if'</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']</loc>
+      <line>19</line>
+      <col/>
+      <file>BPEL/ProcesoVueling.bpel</file>
+      <name>BPEL/ProcesoVueling.bpel</name>
+      <fix>Please check import location or element QNames.</fix>
+      <msg>Error al obtener el flujo de entrada XML: file:/C:/JDeveloper/mywork/FlightServicesProject/SOA/WSDLs/EmpleadoProcess.wsdl: C:\JDeveloper\mywork\FlightServicesProject\SOA\WSDLs\EmpleadoProcess.wsdl (El sistema no puede encontrar el archivo especificado)</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='import']</loc>
+      <line>21</line>
+      <col/>
+      <file>BPEL/ProcesoVueling.bpel</file>
+      <name>BPEL/ProcesoVueling.bpel</name>
+      <fix>Check location "../WSDLs/ProcesoVueling.wsdl" and import type "http://schemas.xmlsoap.org/wsdl/"</fix>
+      <msg>Cannot import type "http://schemas.xmlsoap.org/wsdl/" from location "../WSDLs/ProcesoVueling.wsdl"</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='partnerLinks']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='partnerLink'][@name='procesovueling_client']</loc>
+      <line>34</line>
+      <col/>
+      <file>BPEL/ProcesoVueling.bpel</file>
+      <name>BPEL/ProcesoVueling.bpel</name>
+      <fix>Make sure that value "client:ProcesoVueling" is resolvable (check imports, value of "partnerLinkType").</fix>
+      <msg>"partnerLinkType" is set to "client:ProcesoVueling" on this &lt;bpel:partnerLink>  but it cannot be resolved (check value of "partnerLinkType", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variables']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variable'][@name='inputVariable']</loc>
+      <line>45</line>
+      <col/>
+      <file>BPEL/ProcesoVueling.bpel</file>
+      <name>BPEL/ProcesoVueling.bpel</name>
+      <fix>Make sure that value "client:ProcesoVuelingRequestMessage" is resolvable (check imports, value of "messageType").</fix>
+      <msg>"messageType" is set to "client:ProcesoVuelingRequestMessage" on this &lt;bpel:variable>  but it cannot be resolved (check value of "messageType", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variables']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='variable'][@name='outputVariable']</loc>
+      <line>48</line>
+      <col/>
+      <file>BPEL/ProcesoVueling.bpel</file>
+      <name>BPEL/ProcesoVueling.bpel</name>
+      <fix>Make sure that value "client:ProcesoVuelingResponseMessage" is resolvable (check imports, value of "messageType").</fix>
+      <msg>"messageType" is set to "client:ProcesoVuelingResponseMessage" on this &lt;bpel:variable>  but it cannot be resolved (check value of "messageType", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='receive'][@name='receiveInput']</loc>
+      <line>61</line>
+      <col/>
+      <file>BPEL/ProcesoVueling.bpel</file>
+      <name>BPEL/ProcesoVueling.bpel</name>
+      <fix>Check the bpel:partnerLink specified on this activity via attribute "partnerLink" and make sure it is itself specified correctly.</fix>
+      <msg>The activity &lt;bpel:receive> refers to a bpel:partnerLink (via the attribute "partnerLink") - this bpel:partnerLink needs to be defined correctly.</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='receive'][@name='receiveInput']</loc>
+      <line>61</line>
+      <col/>
+      <file>BPEL/ProcesoVueling.bpel</file>
+      <name>BPEL/ProcesoVueling.bpel</name>
+      <fix>Make sure that value "client:ProcesoVueling" is resolvable (check imports, value of "portType").</fix>
+      <msg>"portType" is set to "client:ProcesoVueling" on this &lt;bpel:receive> activity but it cannot be resolved (check value of "portType", imports, WSDLs or XSDs).</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='receive'][@name='receiveInput']</loc>
+      <line>61</line>
+      <col/>
+      <file>BPEL/ProcesoVueling.bpel</file>
+      <name>BPEL/ProcesoVueling.bpel</name>
+      <fix>Check the bpel:variable specified on this activity via attribute "variable" and make sure it is itself specified correctly.</fix>
+      <msg>The activity &lt;bpel:receive> refers to a bpel:variable (via the attribute "variable") - this bpel:variable needs to be defined correctly.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='reply'][@name='replyOutput']</loc>
+      <line>64</line>
+      <col/>
+      <file>BPEL/ProcesoVueling.bpel</file>
+      <name>BPEL/ProcesoVueling.bpel</name>
+      <fix>Check the bpel:partnerLink specified on this activity via attribute "partnerLink" and make sure it is itself specified correctly.</fix>
+      <msg>The activity &lt;bpel:reply> refers to a bpel:partnerLink (via the attribute "partnerLink") - this bpel:partnerLink needs to be defined correctly.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='reply'][@name='replyOutput']</loc>
+      <line>64</line>
+      <col/>
+      <file>BPEL/ProcesoVueling.bpel</file>
+      <name>BPEL/ProcesoVueling.bpel</name>
+      <fix>Check the bpel:variable specified on this activity via attribute "variable" and make sure it is itself specified correctly.</fix>
+      <msg>The activity &lt;bpel:reply> refers to a bpel:variable (via the attribute "variable") - this bpel:variable needs to be defined correctly.</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='reply'][@name='replyOutput']</loc>
+      <line>64</line>
+      <col/>
+      <file>BPEL/ProcesoVueling.bpel</file>
+      <name>BPEL/ProcesoVueling.bpel</name>
+      <fix>Make sure that value "client:ProcesoVueling" is resolvable (check imports, value of "portType").</fix>
+      <msg>"portType" is set to "client:ProcesoVueling" on this &lt;bpel:reply> activity but it cannot be resolved (check value of "portType", imports, WSDLs or XSDs).</msg>
    </Fault>
 </Faults>

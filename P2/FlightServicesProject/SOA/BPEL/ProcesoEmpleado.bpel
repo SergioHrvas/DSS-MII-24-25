@@ -52,10 +52,10 @@
     -->
     <variables>
         <!-- Reference to the message passed as input during initiation -->
-        <variable name="inputVariable" messageType="ns1:EmpleadoRequestMessage"/>
+        <variable name="inputVariable" messageType="client:ProcesoEmpleadoRequestMessage"/>
 
         <!-- Reference to the message that will be sent back to the requester during callback -->
-        <variable name="outputVariable" messageType="ns1:EmpleadoResponseMessage"/>
+        <variable name="outputVariable" messageType="client:ProcesoEmpleadoResponseMessage"/>
     </variables>
 
     <!-- 
@@ -69,18 +69,18 @@
         <!-- Receive input from requestor. (Note: This maps to operation defined in ProcesoEmpleado.wsdl) -->
         <receive name="receiveInput" partnerLink="procesoempleado_client" portType="client:ProcesoEmpleado" operation="process" variable="inputVariable" createInstance="yes"/>
         <if name="If1">
-            <condition>$inputVariable = "Sergio Hervás"</condition>
+            <condition>$inputVariable.payload/client:nombre = "Sergio Hervás"</condition>
             <assign name="Assign1">
                 <copy>
                     <from>"First class"</from>
-                    <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable</to>
+                    <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:tipoBillete</to>
                 </copy>
             </assign>
             <else>
                 <assign name="Assign2">
                     <copy>
                         <from>"Tourist"</from>
-                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable</to>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:tipoBillete</to>
                     </copy>
                 </assign>
             </else>
@@ -88,6 +88,7 @@
         <!-- 
           Asynchronous callback to the requester. (Note: the callback location and correlation id is transparently handled using WS-addressing.)
         -->
-        <invoke name="callbackClient" partnerLink="procesoempleado_client" portType="client:ProcesoEmpleadoCallback" operation="processResponse" inputVariable="outputVariable"/>
+        <invoke name="callbackClient" partnerLink="procesoempleado_client" portType="client:ProcesoEmpleadoCallback" operation="processResponse" inputVariable="outputVariable"
+                bpelx:invokeAsDetail="no"/>
     </sequence>
 </process>
