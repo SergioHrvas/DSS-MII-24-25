@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <wsdl:definitions name="ProcesoEmpleado"
-             targetNamespace="http://xmlns.oracle.com/FlightServicesApp/FlightServicesProject/ProcesoEmpleado"
+             targetNamespace="http://xmlns.oracle.com/FlightServiceApplication/FlightServicesProject/ProcesoEmpleado"
              xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
-             xmlns:client="http://xmlns.oracle.com/FlightServicesApp/FlightServicesProject/ProcesoEmpleado"
+             xmlns:client="http://xmlns.oracle.com/FlightServiceApplication/FlightServicesProject/ProcesoEmpleado"
              xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype">
 
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -13,7 +13,7 @@
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->   
 	<wsdl:types>
 		<schema xmlns="http://www.w3.org/2001/XMLSchema">
-			<import namespace="http://xmlns.oracle.com/FlightServicesApp/FlightServicesProject/ProcesoEmpleado" schemaLocation="../Schemas/ProcesoEmpleado.xsd" />
+			<import namespace="http://xmlns.oracle.com/FlightServiceApplication/FlightServicesProject/ProcesoEmpleado" schemaLocation="../Schemas/ProcesoEmpleado.xsd" />
 		</schema>
 	</wsdl:types>
 
@@ -24,39 +24,27 @@
 	<wsdl:message name="ProcesoEmpleadoRequestMessage">
 		<wsdl:part name="payload" element="client:process"/>
 	</wsdl:message>
-
 	<wsdl:message name="ProcesoEmpleadoResponseMessage">
 		<wsdl:part name="payload" element="client:processResponse"/>
 	</wsdl:message>
-
 
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	PORT TYPE DEFINITION - A port type groups a set of operations into
 	a logical service unit.
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
 	<!-- portType implemented by the ProcesoEmpleado BPEL process -->
 	<wsdl:portType name="ProcesoEmpleado">
 		<wsdl:operation name="process">
-			<wsdl:input message="client:ProcesoEmpleadoRequestMessage"/>
-		</wsdl:operation>
-	</wsdl:portType>
-
-	<!-- portType implemented by the requester of ProcesoEmpleado BPEL process
-	for asynchronous callback purposes
-	-->
-	<wsdl:portType name="ProcesoEmpleadoCallback">
-		<wsdl:operation name="processResponse">
-			<wsdl:input message="client:ProcesoEmpleadoResponseMessage"/>
+			<wsdl:input  message="client:ProcesoEmpleadoRequestMessage" />
+			<wsdl:output message="client:ProcesoEmpleadoResponseMessage"/>
 		</wsdl:operation>
 	</wsdl:portType>
 
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	PARTNER LINK TYPE DEFINITION
-	the ProcesoEmpleado partnerLinkType binds the provider and
-	requester portType into an asynchronous conversation.
-	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ --> 
 	<plnk:partnerLinkType name="ProcesoEmpleado">
 		<plnk:role name="ProcesoEmpleadoProvider" portType="client:ProcesoEmpleado"/>
-		<plnk:role name="ProcesoEmpleadoRequester" portType="client:ProcesoEmpleadoCallback"/>
 	</plnk:partnerLinkType>
 </wsdl:definitions>

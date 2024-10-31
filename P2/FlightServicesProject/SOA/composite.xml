@@ -11,22 +11,12 @@
            xmlns:orawsp="http://schemas.oracle.com/ws/2006/01/policy"
            xmlns:ui="http://xmlns.oracle.com/soa/designer/"
            xmlns:sca-ext="http://xmlns.oracle.com/sca/1.0-ext">
-  <import namespace="http://xmlns.oracle.com/FlightServicesApp/FlightServicesProject/EmpleadoProcess"
-          location="WSDLs/EmpleadoProcess.wsdl" importType="wsdl"/>
-  <import namespace="http://xmlns.oracle.com/FlightServicesApp/FlightServicesProject/ProcesoEmpleado"
-          location="WSDLs/ProcesoEmpleado.wsdl" importType="wsdl"/>
   <import namespace="http://xmlns.oracle.com/FlightServicesApp/FlightServicesProject/ProcesoIberia"
           location="WSDLs/ProcesoIberia.wsdl" importType="wsdl"/>
   <import namespace="http://xmlns.oracle.com/Application1/FlightServicesProject/ProcesoVueling"
           location="WSDLs/ProcesoVueling.wsdl" importType="wsdl"/>
-  <service name="procesoempleado_client_ep" ui:wsdlLocation="WSDLs/ProcesoEmpleado.wsdl">
-    <interface.wsdl interface="http://xmlns.oracle.com/FlightServicesApp/FlightServicesProject/ProcesoEmpleado#wsdl.interface(ProcesoEmpleado)"
-                    callbackInterface="http://xmlns.oracle.com/FlightServicesApp/FlightServicesProject/ProcesoEmpleado#wsdl.interface(ProcesoEmpleadoCallback)"/>
-    <binding.ws port="http://xmlns.oracle.com/FlightServicesApp/FlightServicesProject/ProcesoEmpleado#wsdl.endpoint(procesoempleado_client_ep/ProcesoEmpleado_pt)"/>
-    <callback>
-      <binding.ws port="http://xmlns.oracle.com/FlightServicesApp/FlightServicesProject/ProcesoEmpleado#wsdl.endpoint(procesoempleado_client_ep/ProcesoEmpleadoCallback_pt)"/>
-    </callback>
-  </service>
+  <import namespace="http://xmlns.oracle.com/FlightServiceApplication/FlightServicesProject/ProcesoEmpleado"
+          location="WSDLs/ProcesoEmpleado.wsdl" importType="wsdl"/>
   <service name="procesoiberia_client_ep" ui:wsdlLocation="WSDLs/ProcesoIberia.wsdl">
     <interface.wsdl interface="http://xmlns.oracle.com/FlightServicesApp/FlightServicesProject/ProcesoIberia#wsdl.interface(ProcesoIberia)"/>
     <binding.ws port="http://xmlns.oracle.com/FlightServicesApp/FlightServicesProject/ProcesoIberia#wsdl.endpoint(procesoiberia_client_ep/ProcesoIberia_pt)"/>
@@ -35,27 +25,12 @@
     <interface.wsdl interface="http://xmlns.oracle.com/Application1/FlightServicesProject/ProcesoVueling#wsdl.interface(ProcesoVueling)"/>
     <binding.ws port="http://xmlns.oracle.com/Application1/FlightServicesProject/ProcesoVueling#wsdl.endpoint(procesovueling_client_ep/ProcesoVueling_pt)"/>
   </service>
+  <service name="procesoempleado_client_ep" ui:wsdlLocation="WSDLs/ProcesoEmpleado.wsdl">
+    <interface.wsdl interface="http://xmlns.oracle.com/FlightServiceApplication/FlightServicesProject/ProcesoEmpleado#wsdl.interface(ProcesoEmpleado)"/>
+    <binding.ws port="http://xmlns.oracle.com/FlightServiceApplication/FlightServicesProject/ProcesoEmpleado#wsdl.endpoint(procesoempleado_client_ep/ProcesoEmpleado_pt)"/>
+  </service>
   <property name="productVersion" type="xs:string" many="false">12.2.1.4.0.190828</property>
   <property name="compositeID" type="xs:string" many="false">2124d7c9-fdd1-48c5-807a-863743b497a0</property>
-  <component name="EmpleadoProcess" version="2.0">
-    <implementation.bpel src="BPEL/EmpleadoProcess.bpel"/>
-    <componentType>
-      <service name="empleadoprocess_client" ui:wsdlLocation="WSDLs/EmpleadoProcess.wsdl">
-        <interface.wsdl interface="http://xmlns.oracle.com/FlightServicesApp/FlightServicesProject/EmpleadoProcess#wsdl.interface(EmpleadoProcess)"/>
-      </service>
-    </componentType>
-    <property name="bpel.config.transaction" type="xs:string" many="false">required</property>
-  </component>
-  <component name="ProcesoEmpleado" version="2.0">
-    <implementation.bpel src="BPEL/ProcesoEmpleado.bpel"/>
-    <componentType>
-      <service name="procesoempleado_client" ui:wsdlLocation="WSDLs/ProcesoEmpleado.wsdl">
-        <interface.wsdl interface="http://xmlns.oracle.com/FlightServicesApp/FlightServicesProject/ProcesoEmpleado#wsdl.interface(ProcesoEmpleado)"
-                        callbackInterface="http://xmlns.oracle.com/FlightServicesApp/FlightServicesProject/ProcesoEmpleado#wsdl.interface(ProcesoEmpleadoCallback)"/>
-      </service>
-    </componentType>
-    <property name="bpel.config.oneWayDeliveryPolicy" type="xs:string" many="false">async.persist</property>
-  </component>
   <component name="ProcesoIberia" version="2.0">
     <implementation.bpel src="BPEL/ProcesoIberia.bpel"/>
     <componentType>
@@ -74,10 +49,15 @@
     </componentType>
     <property name="bpel.config.transaction" type="xs:string" many="false">required</property>
   </component>
-  <wire>
-    <source.uri>procesoempleado_client_ep</source.uri>
-    <target.uri>ProcesoEmpleado/procesoempleado_client</target.uri>
-  </wire>
+  <component name="ProcesoEmpleado" version="2.0">
+    <implementation.bpel src="BPEL/ProcesoEmpleado.bpel"/>
+    <componentType>
+      <service name="procesoempleado_client" ui:wsdlLocation="WSDLs/ProcesoEmpleado.wsdl">
+        <interface.wsdl interface="http://xmlns.oracle.com/FlightServiceApplication/FlightServicesProject/ProcesoEmpleado#wsdl.interface(ProcesoEmpleado)"/>
+      </service>
+    </componentType>
+    <property name="bpel.config.transaction" type="xs:string" many="false">required</property>
+  </component>
   <wire>
     <source.uri>procesoiberia_client_ep</source.uri>
     <target.uri>ProcesoIberia/procesoiberia_client</target.uri>
@@ -85,5 +65,9 @@
   <wire>
     <source.uri>procesovueling_client_ep</source.uri>
     <target.uri>ProcesoVueling/procesovueling_client</target.uri>
+  </wire>
+  <wire>
+    <source.uri>procesoempleado_client_ep</source.uri>
+    <target.uri>ProcesoEmpleado/procesoempleado_client</target.uri>
   </wire>
 </composite>

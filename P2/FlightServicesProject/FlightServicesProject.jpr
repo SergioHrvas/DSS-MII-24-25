@@ -113,6 +113,9 @@
          <string v=".exm"/>
          <string v=".xml"/>
       </list>
+      <list n="excludedUrls">
+         <string v="fXSLNonDeployedFiles"/>
+      </list>
       <value n="webIANAEncoding" v="windows-1252"/>
    </hash>
    <hash n="oracle.jdeveloper.deploy.dt.DeploymentProfiles">
