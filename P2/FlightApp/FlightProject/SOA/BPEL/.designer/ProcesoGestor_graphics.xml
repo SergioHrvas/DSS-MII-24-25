@@ -5,11 +5,11 @@
    <iconize/>
    <partnerlink_locations>
       <partnerlink name="procesogestor_client" x="0" y="526" side="left"/>
-      <partnerlink name="VuelingPL" x="0" y="469" side="left"/>
-      <partnerlink name="IberiaPL" x="0" y="583" side="left"/>
-      <partnerlink name="EmpleadoPL" x="498" y="284" side="right"/>
+      <partnerlink name="VuelingService" x="0" y="469" side="left"/>
+      <partnerlink name="IberiaService" x="0" y="583" side="left"/>
+      <partnerlink name="EmpleadoService" x="490" y="284" side="right"/>
    </partnerlink_locations>
-   <graph_layout viewport="0,0,306,767" show_swimlanes="true">
+   <graph_layout viewport="26,375,569,416" show_swimlanes="true">
       <layout_item collapsed="false" xpath="/process" type="process" showhandlers="true"/>
       <layout_item collapsed="false" xpath="/process/sequence" type="sequence"/>
    </graph_layout>

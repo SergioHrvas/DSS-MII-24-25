@@ -1,0 +1,50 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="Comprador"
+     targetNamespace="http://xmlns.oracle.com/CompradorVendedor/ProyectComVend/Comprador"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:client="http://xmlns.oracle.com/CompradorVendedor/ProyectComVend/Comprador"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+    xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+    <plnk:partnerLinkType name="Comprador">
+        <plnk:role name="CompradorProvider" portType="client:Comprador"/>
+    </plnk:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:client="http://xmlns.oracle.com/CompradorVendedor/ProyectComVend/Comprador"
+             xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype">
+            <import namespace="http://xmlns.oracle.com/CompradorVendedor/ProyectComVend/Comprador"
+                 schemaLocation="../Schemas/Comprador.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="CompradorRequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:message name="CompradorResponseMessage">
+        <wsdl:part name="payload" element="client:processResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="Comprador">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:CompradorRequestMessage"/>
+            <wsdl:output message="client:CompradorResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="CompradorSOAP12Binding" type="client:Comprador">
+        <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="process">
+            <soap12:operation style="document"
+                              soapAction="http://xmlns.oracle.com/CompradorVendedor/ProyectComVend/Comprador/process"/>
+            <wsdl:input>
+                <soap12:body use="literal" parts="payload"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal" parts="payload"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="CompradorService">
+        <wsdl:port name="CompradorPort" binding="client:CompradorSOAP12Binding">
+            <soap12:address location="http://localhost:7101/soa-infra/services/default/ProyectComVend/comprador_client_ep"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,50 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="VerCantidad"
+     targetNamespace="http://xmlns.oracle.com/CompradorVendedor/ProyectComVend/VerCantidad"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:client="http://xmlns.oracle.com/CompradorVendedor/ProyectComVend/VerCantidad"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+    xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/">
+    <plnk:partnerLinkType name="VerCantidad">
+        <plnk:role name="VerCantidadProvider" portType="client:VerCantidad"/>
+    </plnk:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:client="http://xmlns.oracle.com/CompradorVendedor/ProyectComVend/VerCantidad"
+             xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype">
+            <import namespace="http://xmlns.oracle.com/CompradorVendedor/ProyectComVend/VerCantidad"
+                 schemaLocation="../Schemas/VerCantidad.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="VerCantidadRequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:message name="VerCantidadResponseMessage">
+        <wsdl:part name="payload" element="client:processResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="VerCantidad">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:VerCantidadRequestMessage"/>
+            <wsdl:output message="client:VerCantidadResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="VerCantidadSOAP12Binding" type="client:VerCantidad">
+        <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="process">
+            <soap12:operation style="document"
+                              soapAction="http://xmlns.oracle.com/CompradorVendedor/ProyectComVend/VerCantidad/process"/>
+            <wsdl:input>
+                <soap12:body use="literal" parts="payload"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal" parts="payload"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="VerCantidadService">
+        <wsdl:port name="VerCantidadPort" binding="client:VerCantidadSOAP12Binding">
+            <soap12:address location="http://localhost:7101/soa-infra/services/default/ProyectComVend/vercantidad_client_ep"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

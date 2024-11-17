@@ -17,7 +17,17 @@
                xmlns:ui="http://xmlns.oracle.com/soa/designer"
                xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
          xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
-         xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap">
 
     <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/FlightApp/Project1/ProcesoIberia" location="../WSDLs/ProcesoIberia.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
     <!-- 
@@ -32,9 +42,9 @@
       used for callback. The location and correlation information associated
       with the client role are automatically set using WS-Addressing.
     -->
-    <partnerLink name="procesoiberia_client" partnerLinkType="client:ProcesoIberia"
-                 partnerRole="ProcesoIberiaProvider"/>
-  </partnerLinks>
+      <partnerLink name="procesoiberia_client_ep" partnerLinkType="client:ProcesoIberia"
+                   myRole="ProcesoIberiaProvider"/>
+   </partnerLinks>
 
   <!-- 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -62,7 +72,16 @@
   <sequence name="main">
 
     <!-- Receive input from requestor. (Note: This maps to operation defined in ProcesoIberia.wsdl) -->
-    <receive name="receiveInput" partnerLink="procesoiberia_client" portType="client:ProcesoIberia" operation="process" variable="inputVariable" createInstance="yes"/><if name="condicionFechas"
+    <receive name="receiveInput" partnerLink="procesoiberia_client_ep" portType="client:ProcesoIberia" operation="process" variable="inputVariable" createInstance="yes"/><assign name="initVariables"
+                                                                                                                                                                                  xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      
+   <copy>
+         <from>0</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$price</to>
+      </copy><copy>
+            <from>10</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$basePrice</to>
+         </copy></assign><if name="condicionFechas"
                                                                                                                                                                            xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
       <documentation>
          <![CDATA[siFechasBien]]>
@@ -75,22 +94,22 @@
             </documentation>
             <condition>$inputVariable.payload/client:tipoBillete = "tourist"</condition>
             <assign name="AssignPriceTourist">
-               <copy>
-                  <from>10 * 10</from>
-                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:precio</to>
-               </copy>
-            </assign>
+                  <copy>
+                     <from>$price + ($basePrice  * 9)</from>
+                     <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$price</to>
+                  </copy>
+               </assign>
             <elseif>
                <documentation>
                   <![CDATA[siBusiness]]>
                </documentation>
                <condition>$inputVariable.payload/client:tipoBillete = "business"</condition>
                <assign name="AssignPriceBusiness">
-                  <copy>
-                     <from>10 * 25</from>
-                     <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:precio</to>
-                  </copy>
-               </assign>
+                     <copy>
+                        <from>$price + ($basePrice  * 26)</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$price</to>
+                     </copy>
+                  </assign>
             </elseif>
             <elseif>
                <documentation>
@@ -98,54 +117,57 @@
                </documentation>
                <condition>$inputVariable.payload/client:tipoBillete = "privatejet"</condition>
                <assign name="AssignPricePrivatejet" xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
-                  <copy>
-                     <from>10*100</from>
-                     <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:precio</to>
-                  </copy>
-               </assign>
+                     <copy>
+                        <from>$price + ($basePrice  * 95)</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$price</to>
+                     </copy>
+                  </assign>
             </elseif>
-            <else>
-               <throw name="Error" faultName="bpel:invalidExpressionValue"
-                      xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"/>
-            </else>
-         </if>
+               <else><throw name="Error" faultName="bpelx:bindingFault"
+                            xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"/></else>
+            </if>
          <if name="condicionTipoAeropuerto" xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
             <documentation>
                <![CDATA[siAMS]]>
             </documentation>
             <condition>$inputVariable.payload/client:tipoAeropuerto = "AMS"</condition>
             <assign name="AssignPriceAMS">
-               <copy>
-                  <from>$price + ($basePrice * 25)</from>
-                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$price</to>
-               </copy>
-            </assign>
+                  <copy>
+                     <from>$price + ($basePrice * 5)</from>
+                     <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$price</to>
+                  </copy>
+               </assign>
             <elseif>
                <documentation>
                   <![CDATA[siFCO]]>
                </documentation>
                <condition>$inputVariable.payload/client:tipoBillete = "business"</condition>
                <assign name="AssignPriceFCO">
-                  <copy>
-                     <from>$price + ($basePrice * 15)</from>
-                     <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$price</to>
-                  </copy>
-               </assign>
+                     <copy>
+                        <from>$price + ($basePrice * 2)</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$price</to>
+                     </copy>
+                  </assign>
             </elseif>
             <else>
                <assign name="AssignPriceAny" xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
-                  <copy>
-                     <from>$basePrice * 5</from>
-                     <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$price</to>
-                  </copy>
-               </assign>
+                     <copy>
+                        <from>$price + ($basePrice  * 4)</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$price</to>
+                     </copy>
+                  </assign>
             </else>
          </if>
       </sequence>
       <else>
-         <throw name="Error" faultName="bpelx:bindingFault"/>
+         <throw name="Error" faultName="client:InvalidDateRangeFault"/>
       </else>
-   </if><!-- Generate reply to synchronous request -->
-    <reply name="replyOutput" partnerLink="procesoiberia_client" portType="client:ProcesoIberia" operation="process" variable="outputVariable"/>
+   </if><assign name="AssignPriceAny" xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      
+   <copy>
+         <from>$price</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:precio</to>
+      </copy></assign><!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="procesoiberia_client_ep" portType="client:ProcesoIberia" operation="process" variable="outputVariable"/>
   </sequence>
 </process>

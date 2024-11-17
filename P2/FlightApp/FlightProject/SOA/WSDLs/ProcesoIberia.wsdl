@@ -39,7 +39,8 @@
 		<wsdl:operation name="process">
 			<wsdl:input  message="client:ProcesoIberiaRequestMessage" />
 			<wsdl:output message="client:ProcesoIberiaResponseMessage"/>
-		</wsdl:operation>
+   <wsdl:fault name="InvalidDateRangeFault" message="client:ProcesoIberiaResponseMessage"/>
+  </wsdl:operation>
 	</wsdl:portType>
 
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -60,4 +61,9 @@
    </wsdl:output>
   </wsdl:operation>
  </wsdl:binding>
+ <wsdl:service name="ProcesoIberiaService">
+  <wsdl:port name="ProcesoIberiaPort" binding="client:ProcesoIberiaSOAP12Binding">
+   <soap12:address location="http://localhost:7101/soa-infra/services/default/Project1/procesoiberia_client_ep"/>
+  </wsdl:port>
+ </wsdl:service>
 </wsdl:definitions>

@@ -41,8 +41,7 @@
       used for callback. The location and correlation information associated
       with the client role are automatically set using WS-Addressing.
     -->
-    <partnerLink name="procesoempleado_client" partnerLinkType="client:ProcesoEmpleado"
-                 partnerRole="ProcesoEmpleadoProvider"/>
+    <partnerLink name="procesoempleado_client" partnerLinkType="client:ProcesoEmpleado" myRole="ProcesoEmpleadoProvider"/>
   </partnerLinks>
 
   <!-- 
@@ -71,7 +70,7 @@
     <!-- Receive input from requestor. (Note: This maps to operation defined in ProcesoEmpleado.wsdl) -->
     <receive name="receiveInput" partnerLink="procesoempleado_client" portType="client:ProcesoEmpleado" operation="process" variable="inputVariable" createInstance="yes"/>
     <if name="If1">
-      <condition>$inputVariable.payload/client:nombre = "Sergio Hervás"</condition>
+      <condition>xp20:lower-case($inputVariable.payload/client:nombre) = "sergio hervás"</condition>
       <assign name="Assign1">
         <copy>
           <from>"business"</from>
@@ -79,7 +78,7 @@
         </copy>
       </assign>
       <elseif>
-        <condition>$inputVariable.payload/client:nombre = "Miguel Morales"</condition>
+        <condition>xp20:lower-case($inputVariable.payload/client:nombre) = "miguel morales"</condition>
         <assign name="Assign2">
           <copy>
             <from>"privatejet"</from>

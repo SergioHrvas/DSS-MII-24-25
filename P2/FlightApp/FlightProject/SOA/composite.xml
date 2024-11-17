@@ -15,9 +15,9 @@
           importType="wsdl"/>
   <import namespace="http://xmlns.oracle.com/FlightApp/Project1/ProcesoEmpleado" location="WSDLs/ProcesoEmpleado.wsdl"
           importType="wsdl"/>
-  <import namespace="http://xmlns.oracle.com/FlightApp/Project1/ProcesoVueling" location="WSDLs/ProcesoVueling.wsdl"
-          importType="wsdl"/>
   <import namespace="http://xmlns.oracle.com/FlightApp/Project1/ProcesoIberia" location="WSDLs/ProcesoIberia.wsdl"
+          importType="wsdl"/>
+  <import namespace="http://xmlns.oracle.com/FlightApp/Project1/ProcesoVueling" location="WSDLs/ProcesoVueling.wsdl"
           importType="wsdl"/>
   <service name="procesogestor_client_ep" ui:wsdlLocation="WSDLs/ProcesoGestor.wsdl">
     <interface.wsdl interface="http://xmlns.oracle.com/FlightApp/Project1/ProcesoGestor#wsdl.interface(ProcesoGestor)"/>
@@ -29,13 +29,15 @@
     <interface.wsdl interface="http://xmlns.oracle.com/FlightApp/Project1/ProcesoEmpleado#wsdl.interface(ProcesoEmpleado)"/>
     <binding.ws port="http://xmlns.oracle.com/FlightApp/Project1/ProcesoEmpleado#wsdl.endpoint(procesoempleado_client_ep/ProcesoEmpleado_pt)"/>
   </service>
-  <service name="procesovueling_client_ep" ui:wsdlLocation="WSDLs/ProcesoVueling.wsdl">
+  <service name="procesovueling_client_ep"
+           ui:wsdlLocation="WSDLs/ProcesoVueling.wsdl">
     <interface.wsdl interface="http://xmlns.oracle.com/FlightApp/Project1/ProcesoVueling#wsdl.interface(ProcesoVueling)"/>
-    <binding.ws port="http://xmlns.oracle.com/FlightApp/Project1/ProcesoVueling#wsdl.endpoint(procesovueling_client_ep/ProcesoVueling_pt)"/>
+    <binding.ws port="http://xmlns.oracle.com/FlightApp/Project1/ProcesoVueling#wsdl.endpoint(ProcesoVuelingService/ProcesoVuelingPort)"
+                location="WSDLs/ProcesoVueling.wsdl" soapVersion="1.2"/>
   </service>
   <service name="procesoiberia_client_ep" ui:wsdlLocation="WSDLs/ProcesoIberia.wsdl">
     <interface.wsdl interface="http://xmlns.oracle.com/FlightApp/Project1/ProcesoIberia#wsdl.interface(ProcesoIberia)"/>
-    <binding.ws port="http://xmlns.oracle.com/FlightApp/Project1/ProcesoIberia#wsdl.endpoint(procesoiberia_client_ep/ProcesoIberia_pt)"/>
+    <binding.ws port="http://xmlns.oracle.com/FlightApp/Project1/ProcesoIberia#wsdl.endpoint(ProcesoIberiaService/ProcesoIberiaPort)"/>
   </service>
   <property name="productVersion" type="xs:string" many="false">12.2.1.4.0.190828</property>
   <property name="compositeID" type="xs:string" many="false">34065c3d-e1ab-497a-a5d6-142de56783aa</property>
@@ -45,13 +47,14 @@
       <service name="procesogestor_client" ui:wsdlLocation="WSDLs/ProcesoGestor.wsdl">
         <interface.wsdl interface="http://xmlns.oracle.com/FlightApp/Project1/ProcesoGestor#wsdl.interface(ProcesoGestor)"/>
       </service>
-      <reference name="EmpleadoPL" ui:wsdlLocation="WSDLs/ProcesoEmpleado.wsdl">
+      <reference name="EmpleadoService" ui:wsdlLocation="WSDLs/ProcesoEmpleado.wsdl">
         <interface.wsdl interface="http://xmlns.oracle.com/FlightApp/Project1/ProcesoEmpleado#wsdl.interface(ProcesoEmpleado)"/>
       </reference>
-      <reference name="VuelingPL" ui:wsdlLocation="WSDLs/ProcesoVueling.wsdl">
+      <reference name="VuelingService"
+                 ui:wsdlLocation="WSDLs/ProcesoVueling.wsdl">
         <interface.wsdl interface="http://xmlns.oracle.com/FlightApp/Project1/ProcesoVueling#wsdl.interface(ProcesoVueling)"/>
       </reference>
-      <reference name="IberiaPL" ui:wsdlLocation="WSDLs/ProcesoIberia.wsdl">
+      <reference name="IberiaService" ui:wsdlLocation="WSDLs/ProcesoIberia.wsdl">
         <interface.wsdl interface="http://xmlns.oracle.com/FlightApp/Project1/ProcesoIberia#wsdl.interface(ProcesoIberia)"/>
       </reference>
     </componentType>
@@ -69,7 +72,8 @@
   <component name="ProcesoVueling" version="2.0">
     <implementation.bpel src="BPEL/ProcesoVueling.bpel"/>
     <componentType>
-      <service name="procesovueling_client" ui:wsdlLocation="WSDLs/ProcesoVueling.wsdl">
+      <service name="procesovueling_client"
+               ui:wsdlLocation="WSDLs/ProcesoVueling.wsdl">
         <interface.wsdl interface="http://xmlns.oracle.com/FlightApp/Project1/ProcesoVueling#wsdl.interface(ProcesoVueling)"/>
       </service>
     </componentType>
@@ -78,38 +82,60 @@
   <component name="ProcesoIberia" version="2.0">
     <implementation.bpel src="BPEL/ProcesoIberia.bpel"/>
     <componentType>
-      <service name="procesoiberia_client" ui:wsdlLocation="WSDLs/ProcesoIberia.wsdl">
+      <service name="procesoiberia_client_ep" ui:wsdlLocation="WSDLs/ProcesoIberia.wsdl">
         <interface.wsdl interface="http://xmlns.oracle.com/FlightApp/Project1/ProcesoIberia#wsdl.interface(ProcesoIberia)"/>
       </service>
     </componentType>
     <property name="bpel.config.transaction" type="xs:string" many="false">required</property>
   </component>
+  <reference name="EmpleadoService" ui:wsdlLocation="WSDLs/ProcesoEmpleado.wsdl">
+    <interface.wsdl interface="http://xmlns.oracle.com/FlightApp/Project1/ProcesoEmpleado#wsdl.interface(ProcesoEmpleado)"/>
+    <binding.ws port="http://xmlns.oracle.com/FlightApp/Project1/ProcesoEmpleado#wsdl.endpoint(ProcesoEmpleadoService/ProcesoEmpleadoPort)"
+                location="WSDLs/ProcesoEmpleado.wsdl" soapVersion="1.2">
+      <property name="weblogic.wsee.wsat.transaction.flowOption" type="xs:string" many="false">WSDLDriven</property>
+    </binding.ws>
+  </reference>
+  <reference name="VuelingService"
+             ui:wsdlLocation="WSDLs/ProcesoVueling.wsdl">
+    <interface.wsdl interface="http://xmlns.oracle.com/FlightApp/Project1/ProcesoVueling#wsdl.interface(ProcesoVueling)"/>
+    <binding.ws port="http://xmlns.oracle.com/FlightApp/Project1/ProcesoVueling#wsdl.endpoint(ProcesoVuelingService/ProcesoVuelingPort)"
+                location="WSDLs/ProcesoVueling.wsdl" soapVersion="1.2">
+      <property name="weblogic.wsee.wsat.transaction.flowOption" type="xs:string" many="false">WSDLDriven</property>
+    </binding.ws>
+  </reference>
+  <reference name="IberiaService" ui:wsdlLocation="WSDLs/ProcesoIberia.wsdl">
+    <interface.wsdl interface="http://xmlns.oracle.com/FlightApp/Project1/ProcesoIberia#wsdl.interface(ProcesoIberia)"/>
+    <binding.ws port="http://xmlns.oracle.com/FlightApp/Project1/ProcesoIberia#wsdl.endpoint(ProcesoIberiaService/ProcesoIberiaPort)"
+                location="WSDLs/ProcesoIberia.wsdl" soapVersion="1.2">
+      <property name="weblogic.wsee.wsat.transaction.flowOption" type="xs:string" many="false">WSDLDriven</property>
+    </binding.ws>
+    </reference>
   <wire>
     <source.uri>procesogestor_client_ep</source.uri>
     <target.uri>ProcesoGestor/procesogestor_client</target.uri>
   </wire>
   <wire>
-    <source.uri>procesoempleado_client_ep</source.uri>
-    <target.uri>ProcesoEmpleado/procesoempleado_client</target.uri>
+    <source.uri>ProcesoGestor/EmpleadoService</source.uri>
+    <target.uri>EmpleadoService</target.uri>
+  </wire>
+  <wire>
+    <source.uri>ProcesoGestor/VuelingService</source.uri>
+    <target.uri>VuelingService</target.uri>
+  </wire>
+  <wire>
+    <source.uri>ProcesoGestor/IberiaService</source.uri>
+    <target.uri>IberiaService</target.uri>
+  </wire>
+  <wire>
+    <source.uri>procesoiberia_client_ep</source.uri>
+    <target.uri>ProcesoIberia/procesoiberia_client_ep</target.uri>
   </wire>
   <wire>
     <source.uri>procesovueling_client_ep</source.uri>
     <target.uri>ProcesoVueling/procesovueling_client</target.uri>
   </wire>
   <wire>
-    <source.uri>procesoiberia_client_ep</source.uri>
-    <target.uri>ProcesoIberia/procesoiberia_client</target.uri>
-  </wire>
-  <wire>
-    <source.uri>ProcesoGestor/EmpleadoPL</source.uri>
+    <source.uri>procesoempleado_client_ep</source.uri>
     <target.uri>ProcesoEmpleado/procesoempleado_client</target.uri>
-  </wire>
-  <wire>
-    <source.uri>ProcesoGestor/VuelingPL</source.uri>
-    <target.uri>ProcesoVueling/procesovueling_client</target.uri>
-  </wire>
-  <wire>
-    <source.uri>ProcesoGestor/IberiaPL</source.uri>
-    <target.uri>ProcesoIberia/procesoiberia_client</target.uri>
   </wire>
 </composite>

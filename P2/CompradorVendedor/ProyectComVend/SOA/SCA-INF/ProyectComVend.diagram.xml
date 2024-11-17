@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dgm:gDiagram xmlns:dgm="http://xmlns.oracle.com/sca/soadgm">
+    <dgm:gService name="vercantidad_client_ep">
+        <dgm:body borderWidth="2" arcRad="20" X="21" Y="415" width="137" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="11" Y="408" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:outputPort name="vercantidad_client_ep" X="127" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/CompradorVendedor/ProyectComVend/VerCantidad#wsdl.interface(VerCantidad)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/mft_adapter_20x20.png" X="20" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>process</dgm:item>
+        </dgm:operations>
+    </dgm:gService>
+    <dgm:gService name="vendedor_client_ep">
+        <dgm:body borderWidth="2" arcRad="20" X="21" Y="299" width="137" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="11" Y="292" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:outputPort name="vendedor_client_ep" X="127" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/CompradorVendedor/ProyectComVend/Vendedor#wsdl.interface(Vendedor)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/mft_adapter_20x20.png" X="20" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>process</dgm:item>
+        </dgm:operations>
+    </dgm:gService>
+    <dgm:gService name="gestor_client_ep">
+        <dgm:body borderWidth="2" arcRad="20" X="21" Y="158" width="137" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="11" Y="151" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:outputPort name="gestor_client_ep" X="127" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/CompradorVendedor/ProyectComVend/Gestor#wsdl.interface(Gestor)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/mft_adapter_20x20.png" X="20" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>process</dgm:item>
+        </dgm:operations>
+    </dgm:gService>
+    <dgm:gService name="comprador_client_ep">
+        <dgm:body borderWidth="2" arcRad="20" X="21" Y="41" width="137" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="11" Y="34" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:outputPort name="comprador_client_ep" X="127" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/CompradorVendedor/ProyectComVend/Comprador#wsdl.interface(Comprador)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/mft_adapter_20x20.png" X="20" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>process</dgm:item>
+        </dgm:operations>
+    </dgm:gService>
+    <dgm:gReference name="comprador_client">
+        <dgm:body borderWidth="2" arcRad="20" X="686" Y="275" width="136" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="676" Y="268" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="comprador_client" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/CompradorVendedor/ProyectComVend/Comprador#wsdl.interface(Comprador)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/mft_adapter_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>process</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gReference name="vendedor_client">
+        <dgm:body borderWidth="2" arcRad="20" X="686" Y="39" width="136" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="676" Y="32" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="vendedor_client" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/CompradorVendedor/ProyectComVend/Vendedor#wsdl.interface(Vendedor)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/mft_adapter_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>process</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gReference name="vercantidad_client">
+        <dgm:body borderWidth="2" arcRad="20" X="686" Y="157" width="136" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="676" Y="150" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="vercantidad_client" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/CompradorVendedor/ProyectComVend/VerCantidad#wsdl.interface(VerCantidad)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/mft_adapter_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>process</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gComponent name="VerCantidad">
+        <dgm:body borderWidth="2" arcRad="20" X="226" Y="400" width="130" height="61">
+            <dgm:borderColor r="69" g="113" b="140"/>
+            <dgm:lightBgColor r="166" g="208" b="230"/>
+            <dgm:darkBgColor r="99" g="162" b="201"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="216" Y="393" width="150" height="77">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="vercantidad_client" X="-10" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/CompradorVendedor/ProyectComVend/VerCantidad#wsdl.interface(VerCantidad)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/bpel/shared/plugins/resources/images/soa/process_20x20.png" X="10" Y="4" width="20" height="20"/>
+    </dgm:gComponent>
+    <dgm:gComponent name="Comprador">
+        <dgm:body borderWidth="2" arcRad="20" X="226" Y="26" width="130" height="61">
+            <dgm:borderColor r="69" g="113" b="140"/>
+            <dgm:lightBgColor r="166" g="208" b="230"/>
+            <dgm:darkBgColor r="99" g="162" b="201"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="216" Y="19" width="150" height="77">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="comprador_client" X="-10" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/CompradorVendedor/ProyectComVend/Comprador#wsdl.interface(Comprador)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/bpel/shared/plugins/resources/images/soa/process_20x20.png" X="10" Y="4" width="20" height="20"/>
+    </dgm:gComponent>
+    <dgm:gComponent name="Vendedor">
+        <dgm:body borderWidth="2" arcRad="20" X="226" Y="284" width="130" height="61">
+            <dgm:borderColor r="69" g="113" b="140"/>
+            <dgm:lightBgColor r="166" g="208" b="230"/>
+            <dgm:darkBgColor r="99" g="162" b="201"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="216" Y="277" width="150" height="77">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="vendedor_client" X="-10" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/CompradorVendedor/ProyectComVend/Vendedor#wsdl.interface(Vendedor)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/bpel/shared/plugins/resources/images/soa/process_20x20.png" X="10" Y="4" width="20" height="20"/>
+    </dgm:gComponent>
+    <dgm:gComponent name="Gestor">
+        <dgm:body borderWidth="2" arcRad="20" X="473" Y="143" width="130" height="111">
+            <dgm:borderColor r="69" g="113" b="140"/>
+            <dgm:lightBgColor r="166" g="208" b="230"/>
+            <dgm:darkBgColor r="99" g="162" b="201"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="463" Y="136" width="150" height="127">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="gestor_client" X="-10" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/CompradorVendedor/ProyectComVend/Gestor#wsdl.interface(Gestor)"/>
+        <dgm:outputPort name="vendedor_client" X="120" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/CompradorVendedor/ProyectComVend/Vendedor#wsdl.interface(Vendedor)"/>
+        <dgm:outputPort name="vercantidad_client" X="120" Y="40" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/CompradorVendedor/ProyectComVend/VerCantidad#wsdl.interface(VerCantidad)"/>
+        <dgm:outputPort name="comprador_client" X="120" Y="65" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/CompradorVendedor/ProyectComVend/Comprador#wsdl.interface(Comprador)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/bpel/shared/plugins/resources/images/soa/process_20x20.png" X="10" Y="4" width="20" height="20"/>
+    </dgm:gComponent>
+    <dgm:gWireLink source="vendedor_client_ep" target="Vendedor/vendedor_client" width="2">
+        <dgm:gSegment X1="168" Y1="309" X2="216" Y2="309"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="gestor_client_ep" target="Gestor/gestor_client" width="2">
+        <dgm:gSegment X1="168" Y1="168" X2="463" Y2="168"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="Gestor/vendedor_client" target="vendedor_client" width="2">
+        <dgm:gSegment X1="613" Y1="168" X2="637" Y2="168"/>
+        <dgm:gSegment X1="637" Y1="168" X2="637" Y2="49"/>
+        <dgm:gSegment X1="637" Y1="49" X2="676" Y2="49"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="vercantidad_client_ep" target="VerCantidad/vercantidad_client" width="2">
+        <dgm:gSegment X1="168" Y1="425" X2="216" Y2="425"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="Gestor/vercantidad_client" target="vercantidad_client" width="2">
+        <dgm:gSegment X1="613" Y1="193" X2="652" Y2="193"/>
+        <dgm:gSegment X1="652" Y1="193" X2="652" Y2="167"/>
+        <dgm:gSegment X1="652" Y1="167" X2="676" Y2="167"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="Gestor/comprador_client" target="comprador_client" width="2">
+        <dgm:gSegment X1="613" Y1="218" X2="637" Y2="218"/>
+        <dgm:gSegment X1="637" Y1="218" X2="637" Y2="285"/>
+        <dgm:gSegment X1="637" Y1="285" X2="676" Y2="285"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="comprador_client_ep" target="Comprador/comprador_client" width="2">
+        <dgm:gSegment X1="168" Y1="51" X2="216" Y2="51"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+</dgm:gDiagram>
