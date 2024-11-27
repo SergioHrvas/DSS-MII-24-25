@@ -9,7 +9,7 @@
             <dgm:bgColor r="196" g="228" b="240"/>
         </dgm:shadow>
         <dgm:outputPort name="vercantidad_client_ep" X="127" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/CompradorVendedor/ProyectComVend/VerCantidad#wsdl.interface(VerCantidad)"/>
-        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/mft_adapter_20x20.png" X="20" Y="4" width="20" height="20"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/soap_service_20x20.png" X="20" Y="4" width="20" height="20"/>
         <dgm:operations>
             <dgm:item>process</dgm:item>
         </dgm:operations>
@@ -23,7 +23,7 @@
             <dgm:bgColor r="196" g="228" b="240"/>
         </dgm:shadow>
         <dgm:outputPort name="vendedor_client_ep" X="127" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/CompradorVendedor/ProyectComVend/Vendedor#wsdl.interface(Vendedor)"/>
-        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/mft_adapter_20x20.png" X="20" Y="4" width="20" height="20"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/soap_service_20x20.png" X="20" Y="4" width="20" height="20"/>
         <dgm:operations>
             <dgm:item>process</dgm:item>
         </dgm:operations>
@@ -37,7 +37,7 @@
             <dgm:bgColor r="196" g="228" b="240"/>
         </dgm:shadow>
         <dgm:outputPort name="gestor_client_ep" X="127" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/CompradorVendedor/ProyectComVend/Gestor#wsdl.interface(Gestor)"/>
-        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/mft_adapter_20x20.png" X="20" Y="4" width="20" height="20"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/soap_service_20x20.png" X="20" Y="4" width="20" height="20"/>
         <dgm:operations>
             <dgm:item>process</dgm:item>
         </dgm:operations>
@@ -51,7 +51,7 @@
             <dgm:bgColor r="196" g="228" b="240"/>
         </dgm:shadow>
         <dgm:outputPort name="comprador_client_ep" X="127" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/CompradorVendedor/ProyectComVend/Comprador#wsdl.interface(Comprador)"/>
-        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/mft_adapter_20x20.png" X="20" Y="4" width="20" height="20"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/soap_service_20x20.png" X="20" Y="4" width="20" height="20"/>
         <dgm:operations>
             <dgm:item>process</dgm:item>
         </dgm:operations>
@@ -65,7 +65,7 @@
             <dgm:bgColor r="196" g="228" b="240"/>
         </dgm:shadow>
         <dgm:inputPort name="comprador_client" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/CompradorVendedor/ProyectComVend/Comprador#wsdl.interface(Comprador)"/>
-        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/mft_adapter_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/soap_service_20x20.png" X="27" Y="4" width="20" height="20"/>
         <dgm:operations>
             <dgm:item>process</dgm:item>
         </dgm:operations>
@@ -79,7 +79,7 @@
             <dgm:bgColor r="196" g="228" b="240"/>
         </dgm:shadow>
         <dgm:inputPort name="vendedor_client" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/CompradorVendedor/ProyectComVend/Vendedor#wsdl.interface(Vendedor)"/>
-        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/mft_adapter_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/soap_service_20x20.png" X="27" Y="4" width="20" height="20"/>
         <dgm:operations>
             <dgm:item>process</dgm:item>
         </dgm:operations>
@@ -93,7 +93,7 @@
             <dgm:bgColor r="196" g="228" b="240"/>
         </dgm:shadow>
         <dgm:inputPort name="vercantidad_client" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/CompradorVendedor/ProyectComVend/VerCantidad#wsdl.interface(VerCantidad)"/>
-        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/mft_adapter_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/soap_service_20x20.png" X="27" Y="4" width="20" height="20"/>
         <dgm:operations>
             <dgm:item>process</dgm:item>
         </dgm:operations>

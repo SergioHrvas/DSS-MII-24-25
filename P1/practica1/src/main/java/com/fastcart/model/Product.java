@@ -8,7 +8,7 @@ import jakarta.persistence.OneToMany;
 import java.util.Set;
 import java.util.HashSet;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -25,7 +25,7 @@ public class Product {
 	private double price;
 
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-	@JsonBackReference
+	@JsonIgnore
 	private Set<CartItem> cartItems =  new HashSet<>();; // Cambiado a colección
 	
 
