@@ -23,10 +23,13 @@ public class Product {
 	
 	private String name;
 	private double price;
+	private String imagePath;
 
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnore
 	private Set<CartItem> cartItems =  new HashSet<>();; // Cambiado a colección
 	
-
+	public void setImagePath(String path) {
+		imagePath = path;
+	}
 }
