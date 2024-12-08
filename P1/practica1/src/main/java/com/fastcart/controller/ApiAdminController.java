@@ -31,7 +31,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class ApiAdminController {
 	private final ProductService productService;
 
-    private final String uploadDir = "uploads/";
+    private final String uploadDir = "src/main/resources/static/uploads/";
     
 	public ApiAdminController(ProductService productService) {
 		this.productService = productService;
@@ -87,8 +87,9 @@ public class ApiAdminController {
 	    // Guarda la imagen en el sistema de archivos
 	    Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
+	    String filePathShort = "uploads/" + filename;
 	    // Retorna la ruta relativa de la imagen
-	    return filePath.toString();
+	    return filePathShort;
 	}
 
 	

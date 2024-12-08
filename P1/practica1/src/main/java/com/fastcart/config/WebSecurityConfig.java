@@ -35,7 +35,7 @@ public class WebSecurityConfig {
             .authorizeHttpRequests(authorize -> 
                 authorize
                 .requestMatchers(toH2Console()).permitAll()
-                .requestMatchers(mvcMatcherBuilder.pattern("/"), mvcMatcherBuilder.pattern("/index.html"), mvcMatcherBuilder.pattern("/h2-console/**"), mvcMatcherBuilder.pattern("products/searchAndFilter"), mvcMatcherBuilder.pattern("/css/**"), mvcMatcherBuilder.pattern("/products"), mvcMatcherBuilder.pattern("/user/register"),mvcMatcherBuilder.pattern("/register"), mvcMatcherBuilder.pattern("/error"), mvcMatcherBuilder.pattern("/favicon.ico"), mvcMatcherBuilder.pattern("/api/**"),mvcMatcherBuilder.pattern("/api/admin/**")).permitAll() // Permitir acceso sin autenticación a la consola H2
+                .requestMatchers(mvcMatcherBuilder.pattern("/"), mvcMatcherBuilder.pattern("/index.html"), mvcMatcherBuilder.pattern("/h2-console/**"), mvcMatcherBuilder.pattern("products/searchAndFilter"), mvcMatcherBuilder.pattern("/css/**"), mvcMatcherBuilder.pattern("/products"), mvcMatcherBuilder.pattern("/user/register"),mvcMatcherBuilder.pattern("/register"), mvcMatcherBuilder.pattern("/error"), mvcMatcherBuilder.pattern("/favicon.ico"), mvcMatcherBuilder.pattern("/api/**"),mvcMatcherBuilder.pattern("/api/admin/**"), mvcMatcherBuilder.pattern("/uploads/**")).permitAll() // Permitir acceso sin autenticación a la consola H2
                 .requestMatchers(mvcMatcherBuilder.pattern("/admin/**")).hasRole("ADMIN")
                 .requestMatchers(mvcMatcherBuilder.pattern("/cart"), mvcMatcherBuilder.pattern("/cart/**")).authenticated()  
                 .anyRequest().authenticated() // Requiere autenticación para cualquier otro endpoint
