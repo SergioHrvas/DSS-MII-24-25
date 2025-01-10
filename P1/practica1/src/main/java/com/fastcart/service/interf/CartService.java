@@ -54,5 +54,13 @@ public interface CartService {
 	 * @return Un array de bytes que representa el contenido del PDF generado.
 	 */
 	public byte[] generateCartPdf(String userName);
+	
+	
+	/**
+	 * Realiza la compra (se eliminan los productos del carro)
+	 *
+	 * @param userName El nombre del usuario cuyo carrito se va a eliminar.
+	 */
+	public void checkout(String userName);
 
 }

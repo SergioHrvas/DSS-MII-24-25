@@ -2,7 +2,8 @@ package com.fastcart;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 
@@ -11,7 +12,7 @@ import com.fastcart.model.User;
 import com.fastcart.service.interf.UserService;
 
 @SpringBootApplication
-public class Application11Application {
+public class Application11Application extends SpringBootServletInitializer {
 	public static void main(String[] args) {
 		SpringApplication.run(Application11Application.class, args);
 	}
@@ -36,4 +37,8 @@ public class Application11Application {
 		};
 	}
 
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(Application11Application.class);
+    }
 }

@@ -66,6 +66,8 @@ public class CartController {
 		headers.setContentType(MediaType.APPLICATION_PDF);
 		headers.setContentDispositionFormData("attachment", "cart.pdf");
 		headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+		
+		cartService.checkout(authentication.getName());
 
 		return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(pdfBytes);
 	}

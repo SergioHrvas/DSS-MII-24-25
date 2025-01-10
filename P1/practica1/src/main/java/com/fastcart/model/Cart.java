@@ -1,5 +1,6 @@
 package com.fastcart.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -14,6 +15,8 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Data
@@ -23,13 +26,15 @@ public class Cart{
 	private Long id;
 	
     @OneToMany(mappedBy = "cart",  cascade = CascadeType.ALL, fetch = FetchType.EAGER) // Un carrito tiene múltiples CartItems
-	private List<CartItem> items;
+	private List<CartItem> items = new ArrayList<>();;
     
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    @JsonBackReference  // Añadir esta anotación
-    private User user;
-    
+	@OneToOne(mappedBy = "cart")
+	@JsonBackReference
+	private User user;
+
+    public List<CartItem> getItems(){
+    	return items;
+    }
 	
 	public void addItem(CartItem new_item) {
 		items.add(new_item);
@@ -58,4 +63,20 @@ public class Cart{
         return "Cart{id=" + this.id + ", itemsCount=" + (items != null ? items.size() : 0) + "}";
     }
 	
+	public void setUser(User user) {
+	    this.user = user;
+	    if (user != null && user.getCart() != this) {
+	        user.setCart(this);
+	    }
+	    
+	    clearItems();
+	}
+	
+	public void clearItems() {
+		this.items.clear(); // Vaciar la lista después de procesar cada item
+	}
+	
+	public User getUser() {
+		return user;
+	}
 }

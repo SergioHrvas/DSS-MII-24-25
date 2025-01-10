@@ -17,4 +17,12 @@ public class CartItemDto {
         this.price = product.getPrice(); // Ajusta según los campos de tu Product
         this.num = productNum;
     }
+    
+    public double getPrice() {
+    	return price;
+    }
+
+    public double getNum() {
+    	return num;
+    }
 }

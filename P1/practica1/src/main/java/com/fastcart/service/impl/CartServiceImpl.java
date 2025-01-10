@@ -239,4 +239,20 @@ public class CartServiceImpl implements CartService {
 		return cart;
 	}
 
+	public void checkout(String userName) {
+	    User user = userRepo.findByUsername(userName)
+	        .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado: " + userName));
+	    
+	    Cart cart = user.getCart();
+
+	    if (cart.getItems() != null) {
+	        for (CartItem item : cart.getItems()) {
+	            item.setCart(null);
+	            cartItemRepo.deleteById(item.getId());
+	        }
+	    }
+
+	    
+	    cartRepo.save(cart);
+	}
 }

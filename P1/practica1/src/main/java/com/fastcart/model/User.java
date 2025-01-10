@@ -39,10 +39,19 @@ public class User implements UserDetails {
 	@Enumerated(EnumType.STRING)
 	private Role role;
 
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "cart_id") // Relación propietaria
 	@JsonManagedReference
 	private Cart cart;
 
+	
+	public void setCart(Cart cart) {
+	    this.cart = cart;
+	    if (cart != null) {
+	        cart.setUser(this);
+	    }
+	}
+	
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;
@@ -68,4 +77,33 @@ public class User implements UserDetails {
 		return List.of(new SimpleGrantedAuthority(role.name()));
 	}
 
+    @Override
+    public String getPassword() {
+        return password; // Devuelve el valor del campo "password"
+    }
+
+    @Override
+    public String getUsername() {
+        return username; // Devuelve el valor del campo "username"
+    }
+
+    public Role getRole() {
+        return role; // Devuelve el valor del campo "username"
+    }
+    
+    public Cart getCart() {
+        return cart; // Devuelve el valor del campo "username"
+    }
+
+    public void setPassword(String password) {
+    	this.password = password;
+    }
+    
+    public void setRole(Role role) {
+    	this.role = role;
+    }
+    
+    public void setUsername(String username) {
+    	this.username = username;
+    }
 }

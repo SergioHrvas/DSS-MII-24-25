@@ -36,4 +36,33 @@ public class CartItem{
         // Evita imprimir el Cart completo para evitar recursión
         return "CartItem{id=" + this.id + ", product=" + product.getId() + "}";
     }
+    
+    public Long getId() {
+        return id;
+    }
+    
+    public Product getProduct() {
+        return product; 
+    }
+    
+    public int getNum() {
+        return num;
+    }
+    
+    public void setId(Long id) {
+        this.id = id; 
+    }
+    
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+    
+    public void setNum(int num) {
+        this.num = num;
+    }
+    
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+    
 }

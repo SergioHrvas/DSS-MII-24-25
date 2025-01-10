@@ -43,14 +43,15 @@ public class UserServiceImpl implements UserService {
 		new_user.setPassword(passwordEncode.encode(user.getPassword())); // Encriptar la contraseña
 		new_user.setRole(user.getRole());
 
-		// Crear y asociar un nuevo carrito
 		Cart cart = new Cart();
-		new_user.setCart(cart);
+		new_user.setCart(cart); // Esto sincroniza automáticamente la relación
 
 		// Guardar usuario y actualizar id en carrito para referenciación mutua.
 		User usuario = userRepo.save(new_user);
 		cart.setUser(usuario);
 		cartRepo.save(cart);
+		
+		
 
         return null; // Si no hay errores, devuelvo null
 	}

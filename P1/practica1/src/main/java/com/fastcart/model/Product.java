@@ -13,6 +13,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Data
@@ -32,4 +34,29 @@ public class Product {
 	public void setImagePath(String path) {
 		imagePath = path;
 	}
+	
+    public Long getId() {
+        return id;
+    }
+	
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price; 
+    }
+    
+    public String getImagePath() {
+        return imagePath;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(double price) {
+        this.price = price; 
+    }
+
 }
